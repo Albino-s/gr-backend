@@ -1,0 +1,22 @@
+{
+  "db": {
+    "driver": "mysql",
+    "user": "user",
+    "password": "password",
+    "host": "localhost",
+    "database": "grocer",
+    "multipleStatements": true
+  },
+  "port": 3000,
+  "secretPass": "plea5e_d1sable_f1eld5_val1dat10n",
+  "auth":{
+    "secret": "rOqYSz95Sj8ZKNjncZKAiVqEpHSmcc7ZYA_bjPhm8X7DsAQRiGpaR4C097_k7mH3",
+    "clientId": "aYpcD0NdtTFyNapVwB7jVcnZN6c1MVBP",
+    "domain": "nutritiousgrocer",
+    "isEncodedSecret": false
+  },
+  "api": {
+      "url": "http://localhost",
+      "path": "v1"
+  }
+}

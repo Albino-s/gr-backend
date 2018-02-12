@@ -1,0 +1,4 @@
+User:
+  $fs-ref: ./user.yaml
+
+$fs-ref: ./errors.yaml

@@ -1,0 +1,10 @@
+{
+  "db": {
+    "driver": "mysql",
+    "user": "root",
+    "password": "13",
+    "host": "localhost",
+    "database": "grocer",
+    "multipleStatements": true
+  }
+}

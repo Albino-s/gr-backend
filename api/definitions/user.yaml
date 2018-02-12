@@ -1,0 +1,23 @@
+type: object
+properties:
+  id:
+    type: number
+  email:
+    type: string
+    description: User's email
+  firstName:
+    type: string
+  lastName:
+    type: string
+  avatar:
+    type: string
+  createdAt:
+    type: string
+  updatedAt:
+    type: string
+  is_admin:
+    type: boolean
+  servings:
+    type: number
+required:
+  - email

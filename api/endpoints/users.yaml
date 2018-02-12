@@ -1,0 +1,13 @@
+/v1/users:
+  get:
+    $fs-ref: ./users/list.yaml
+  post:
+    $fs-ref: ./users/create.yaml
+
+/v1/users/{id}:
+  get:
+    $fs-ref: ./users/view.yaml
+  put:
+    $fs-ref: ./users/update.yaml
+  delete:
+    $fs-ref: ./users/delete.yaml

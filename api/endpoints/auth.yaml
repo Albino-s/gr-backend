@@ -1,0 +1,7 @@
+/v1/auth/token:
+  post:
+    $fs-ref: ./auth/login.yaml
+/v1/auth/signup:
+  post:
+    $fs-ref: ./auth/signup.yaml
+

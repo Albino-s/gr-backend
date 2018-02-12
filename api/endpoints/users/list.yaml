@@ -1,0 +1,18 @@
+x-name: list-users
+summary: Get all the users
+tags:
+  - Users
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - $ref: '#/parameters/search'
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of users
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/User'
+  500:
+    $ref: '#/responses/Unexpected'

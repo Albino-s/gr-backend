@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+.nyc_output
+config/dev.json
+coverage
+dist
+api/swagger.yaml
+package-lock.json

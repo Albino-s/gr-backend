@@ -1,0 +1,18 @@
+date:
+  name: date
+  in: query
+  description: |
+    a date filter, takes a range of dates as
+    `${start.getTime()}..${end.getTime()}`, where start and end both
+    are JS Date objects
+  type: string
+id:
+  name: id
+  in: query
+  description: allows to filter by id
+  type: string
+search:
+  name: search
+  in: query
+  description: this is a text search query
+  type: string

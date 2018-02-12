@@ -1,0 +1,25 @@
+x-name: signup
+summary: Register a new user
+tags:
+  - Auth
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: user
+    in: body
+    description: the user JSON you want to create
+    schema:
+      $ref: '#/definitions/User'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new user
+    schema:
+      $ref: '#/definitions/User'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

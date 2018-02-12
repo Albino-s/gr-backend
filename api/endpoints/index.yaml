@@ -1,0 +1,3 @@
+$fs-ref:
+  - ./auth.yaml
+  - ./users.yaml

@@ -1,0 +1,25 @@
+x-name: create-user
+summary: Create a user
+tags:
+  - Users
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: user
+    in: body
+    description: the user JSON you want to save
+    schema:
+      $ref: '#/definitions/User'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new user
+    schema:
+      $ref: '#/definitions/User'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'
