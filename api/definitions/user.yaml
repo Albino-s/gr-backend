@@ -5,15 +5,14 @@ properties:
   email:
     type: string
     description: User's email
+  password:
+    type: string
+    description: User's password
   firstName:
     type: string
   lastName:
     type: string
   avatar:
-    type: string
-  createdAt:
-    type: string
-  updatedAt:
     type: string
   is_admin:
     type: boolean
