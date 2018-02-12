@@ -8,7 +8,7 @@
     "prepare": "npm run build && npm run s:build && npm run migrate:up",
     "prestart": "npm run prepare",
     "build": "babel -D src -d dist",
-    "start": "node app.js",
+    "start": "node grocer.js",
     "s:val": "swagger-tools validate api/swagger.yaml",
     "s:build": "node ./dist/scripts/build-swagger.js api/index.yaml api/swagger.yaml",
     "migration": "db-migrate create --config config/$NODE_ENV.json -m src/migrations -e db",
@@ -16,7 +16,7 @@
     "migrate:down": "db-migrate down --config config/$NODE_ENV.json -m dist/migrations -e db",
     "migrate:reset": "db-migrate reset --config config/$NODE_ENV.json -m dist/migrations -e db"
   },
-  "main": "app.js",
+  "main": "grocer.js",
   "author": "Anatoly Vesnin <a.s.vesnin@gmail.com>",
   "license": "UNLICENSED",
   "homepage": "https://bitbucket.org/clockwisesoftware/grocer-backend",
