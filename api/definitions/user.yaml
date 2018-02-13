@@ -16,7 +16,9 @@ properties:
     type: string
   is_admin:
     type: boolean
+    default: false
   servings:
     type: number
+    default: 4
 required:
   - email

@@ -1,4 +1,4 @@
-/v1/auth/token:
+/v1/auth/login:
   post:
     $fs-ref: ./auth/login.yaml
 /v1/auth/signup:

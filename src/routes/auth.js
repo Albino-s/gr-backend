@@ -11,7 +11,7 @@ import {generateToken} from '../utils/functions';
 
 const router = new Router();
 
-router.post('/token', bodyType('Object'), universal.route(200, async req => {
+router.post('/login', bodyType('Object'), universal.route(200, async req => {
   const {query: {email, password}} = req;
   return await my(async query => {
     const user = R.head(await Users.findAll({email}, query));

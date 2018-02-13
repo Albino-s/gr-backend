@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import users from '../tables/users';
 import {l} from '../utils/query';
 import universal from '../models/universal';
-import {invalidInputError} from '../utils/errors';
+import {invalidInputError, invalidInput} from '../utils/errors';
 
 const TRUE = users.literal(1);
 
@@ -29,9 +29,21 @@ export const findById = universal.findById(findAll);
 const singular = universal.singular(users, findById);
 
 export const create = R.curry(async (user, sess, query) => {
-  const {email, password} = user;
-  if (email && password && password.length > 3) {
-    user.password = bcrypt.hashSync(password, 10);
+  const {email, password, firstName, lastName} = user;
+  if (password.trim().length < 6) {
+    throw invalidInput("Password must be at least 6 characters long");
+  }
+  if (!email.trim()) {
+    throw invalidInput("Email is required");
+  }
+  const existingUsers = await findAll({email}, query);
+  if (existingUsers.length) {
+    throw invalidInput(`User ${email} already exist`);
+  }
+
+  if (firstName && lastName) {
+    user.servings = user.servings || 4;
+    user.password = bcrypt.hashSync(password.trim(), 10);
     const prepare = o(R.omit(['id']));
     return await singular.create(prepare(user), sess, query);
   }
@@ -40,8 +52,8 @@ export const create = R.curry(async (user, sess, query) => {
 
 export const update = R.curry(async (id, userSeed, sess, query) => {
   const prepare = o(R.omit(['id']));
-  if (userSeed.password) {
-    userSeed.password = bcrypt.hashSync(userSeed.password, 10);
+  if (userSeed.password.trim() && userSeed.password.trim().length > 5) {
+    userSeed.password = bcrypt.hashSync(userSeed.password.trim(), 10);
   }
   return await singular.update(id, prepare(userSeed), sess, query);
 });
