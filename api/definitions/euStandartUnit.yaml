@@ -11,9 +11,5 @@ properties:
     type: string
   short_name_plural:
     type: string
-  createdAt:
-    type: string
-  updatedAt:
-    type: string
 required:
   - name
