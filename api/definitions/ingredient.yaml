@@ -1,0 +1,56 @@
+type: object
+properties:
+  id:
+    type: number
+  unitIngredient:
+    type: number
+  categoryIngredient:
+    type: number
+  calories:
+    type: number
+  name_singular:
+    type: string
+  name_plural:
+    type: string
+  photo:
+    type: string
+  is_deleted:
+    type: boolean
+  total_carbohydrates:
+    type: number
+  sugar:
+    type: number
+  fat_calories:
+    type: number
+  total_fat:
+    type: number
+  saturated_fat:
+    type: number
+  trans_fat:
+    type: number
+  cholesterol:
+    type: number
+  sodium:
+    type: number
+  total_carbs:
+    type: number
+  dietary_fiber:
+    type: number
+  total_sugar:
+    type: number
+  added_sugar:
+    type: number
+  protein:
+    type: number
+  potassium:
+    type: number
+  vitamin_a:
+    type: number
+  vitamin_c:
+    type: number
+  calcium:
+    type: number
+  iron:
+    type: number
+required:
+  - name_singular

@@ -1,5 +1,6 @@
 $fs-ref:
   - ./auth.yaml
   - ./users.yaml
+  - ./ingredients.yaml
   - ./euStandartUnits.yaml
   - ./usaStandartUnits.yaml

@@ -4,5 +4,7 @@ EuStandartUnit:
   $fs-ref: ./euStandartUnit.yaml
 UsaStandartUnit:
   $fs-ref: ./usaStandartUnit.yaml
+Ingredient:
+  $fs-ref: ./ingredient.yaml
 
 $fs-ref: ./errors.yaml

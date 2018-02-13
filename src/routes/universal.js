@@ -55,13 +55,13 @@ export default {
       })
     ],
 
-    remove: (instance, ...middlewares) => [
+    remove: (instance, useSoftDelete = false, ...middlewares) => [
       ...middlewares,
       jail(async (req, res) => {
         await my(async query => {
           req[instance] = await model.findById(req[instance].id, query);
           if (req[instance] && !R.isEmpty(req[instance])) {
-            await model.remove(req[instance].id, req.sess, query);
+            await model.remove(req[instance].id, useSoftDelete, req.sess, query);
           }
           res.status(204).send();
         });

@@ -1,7 +1,7 @@
-x-name: list-users
-summary: Get all users
+x-name: list-ingredients
+summary: Get all ingredients
 tags:
-  - Users
+  - Ingredients
 parameters:
   - $fs-ref: ../../globals/auth-params.yaml
   - $ref: '#/parameters/search'
@@ -9,10 +9,10 @@ responses:
   403:
     $ref: '#/responses/Forbidden'
   200:
-    description: An array of users
+    description: An array of ingredients
     schema:
       type: array
       items:
-        $ref: '#/definitions/User'
+        $ref: '#/definitions/Ingredient'
   500:
     $ref: '#/responses/Unexpected'

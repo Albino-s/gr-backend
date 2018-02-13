@@ -1,5 +1,5 @@
 x-name: list-usa-standart-units
-summary: Get all the usa_standart_units
+summary: Get all usa_standart_units
 tags:
   - USA Units
 parameters:

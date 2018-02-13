@@ -1,0 +1,13 @@
+/v1/ingredients:
+  get:
+    $fs-ref: ./ingredients/list.yaml
+  post:
+    $fs-ref: ./ingredients/create.yaml
+
+/v1/ingredients/{id}:
+  get:
+    $fs-ref: ./ingredients/view.yaml
+  put:
+    $fs-ref: ./ingredients/update.yaml
+  delete:
+    $fs-ref: ./ingredients/delete.yaml

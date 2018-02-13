@@ -1,4 +1,3 @@
-/* eslint camelcase: 0 */
 import R from 'ramda';
 import {Router} from 'express';
 import bcrypt from 'bcrypt';

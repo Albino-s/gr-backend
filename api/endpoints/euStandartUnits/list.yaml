@@ -1,5 +1,5 @@
 x-name: list-eu-standart-units
-summary: Get all the eu_standart_units
+summary: Get all eu_standart_units
 tags:
   - EU Units
 parameters:

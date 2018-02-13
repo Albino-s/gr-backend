@@ -21,8 +21,11 @@ export default {
       return await findById(id, query);
     }),
 
-    remove: R.curry((id, sess, query) =>
-      query(table.delete().where({id}))
-    )
+    remove: R.curry((id, useSoftDelete, sess, query) => {
+      if (useSoftDelete) {
+        return query(table.update({is_deleted: 1}).where({id}));
+      }
+      return query(table.delete().where({id}));
+    })
   })
 };
