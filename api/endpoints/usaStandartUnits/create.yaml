@@ -1,0 +1,25 @@
+x-name: create-usa-standart-unit
+summary: Create usa_standart_unit
+tags:
+  - USA Units
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: usa_standart_unit
+    in: body
+    description: the usa_standart_unit JSON you want to save
+    schema:
+      $ref: '#/definitions/UsaStandartUnit'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new usa_standart_unit
+    schema:
+      $ref: '#/definitions/UsaStandartUnit'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

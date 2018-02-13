@@ -1,0 +1,18 @@
+x-name: list-usa-standart-units
+summary: Get all the usa_standart_units
+tags:
+  - USA Units
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - $ref: '#/parameters/search'
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of USA Units
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/UsaStandartUnit'
+  500:
+    $ref: '#/responses/Unexpected'

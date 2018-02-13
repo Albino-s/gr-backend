@@ -2,5 +2,7 @@ User:
   $fs-ref: ./user.yaml
 EuStandartUnit:
   $fs-ref: ./euStandartUnit.yaml
+UsaStandartUnit:
+  $fs-ref: ./usaStandartUnit.yaml
 
 $fs-ref: ./errors.yaml

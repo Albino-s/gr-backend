@@ -1,0 +1,17 @@
+type: object
+properties:
+  id:
+    type: number
+  name:
+    type: string
+    description: Unit name
+  full_name:
+    type: string
+  name_plural:
+    type: string
+  short_name_plural:
+    type: string
+  is_main:
+    type: boolean
+required:
+  - name

@@ -2,3 +2,4 @@ $fs-ref:
   - ./auth.yaml
   - ./users.yaml
   - ./euStandartUnits.yaml
+  - ./usaStandartUnits.yaml

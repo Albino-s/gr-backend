@@ -3,7 +3,6 @@ summary: Register a new user
 tags:
   - Auth
 parameters:
-  - $fs-ref: ../../globals/auth-params.yaml
   - name: user
     in: body
     description: the user JSON you want to create

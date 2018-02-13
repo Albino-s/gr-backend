@@ -1,0 +1,13 @@
+/v1/usa_standart_units:
+  get:
+    $fs-ref: ./usaStandartUnits/list.yaml
+  post:
+    $fs-ref: ./usaStandartUnits/create.yaml
+
+/v1/usa_standart_units/{id}:
+  get:
+    $fs-ref: ./usaStandartUnits/view.yaml
+  put:
+    $fs-ref: ./usaStandartUnits/update.yaml
+  delete:
+    $fs-ref: ./usaStandartUnits/delete.yaml
