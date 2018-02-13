@@ -2,6 +2,7 @@ import R from 'ramda';
 import {my} from '../utils/query';
 import {bodyType, id} from '../middlewares/validation';
 import {jail, notFoundError} from '../utils/errors';
+import multipleView from '../views/multipleView';
 
 export default {
   route: (status, fn) => jail(async (req, res) => {
@@ -24,7 +25,8 @@ export default {
             }
             return res.send(view(req[instance]));
           }
-          res.send(R.map(view, await model.findAll(req.query, query)));
+          const result = await model.findAll(req.query, query);
+          res.send(multipleView(R.map(view, result), {totalRows: result.length}));
         });
       })
     ],

@@ -1,0 +1,28 @@
+x-name: view-eu-standart-unit
+summary: Get eu_standart_unit with a eu_standart_unit ID
+tags:
+  - EU Units
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: id
+    in: path
+    description: ID of the EU Unit
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: The EU Unit with ID
+    schema:
+      $ref: '#/definitions/EuStandartUnit'
+  404:
+    description: EU Unit not found
+    schema:
+      $ref: '#/definitions/NotFoundError'
+  400:
+    description: Invalid EU Unit ID supplied
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

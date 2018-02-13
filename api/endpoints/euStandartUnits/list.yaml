@@ -1,0 +1,18 @@
+x-name: list-eu-standart-units
+summary: Get all the eu_standart_units
+tags:
+  - EU Units
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - $ref: '#/parameters/search'
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of EU Units
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/EuStandartUnit'
+  500:
+    $ref: '#/responses/Unexpected'

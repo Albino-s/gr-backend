@@ -1,0 +1,25 @@
+x-name: create-eu-standart-unit
+summary: Create eu_standart_unit
+tags:
+  - EU Units
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: eu_standart_unit
+    in: body
+    description: the eu_standart_unit JSON you want to save
+    schema:
+      $ref: '#/definitions/EuStandartUnit'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new eu_standart_unit
+    schema:
+      $ref: '#/definitions/EuStandartUnit'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

@@ -1,0 +1,19 @@
+type: object
+properties:
+  id:
+    type: number
+  name:
+    type: string
+    description: Unit name
+  full_name:
+    type: string
+  name_plural:
+    type: string
+  short_name_plural:
+    type: string
+  createdAt:
+    type: string
+  updatedAt:
+    type: string
+required:
+  - name

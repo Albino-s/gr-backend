@@ -1,4 +1,6 @@
 User:
   $fs-ref: ./user.yaml
+EuStandartUnit:
+  $fs-ref: ./euStandartUnit.yaml
 
 $fs-ref: ./errors.yaml

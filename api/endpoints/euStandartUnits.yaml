@@ -1,0 +1,13 @@
+/v1/eu_standart_units:
+  get:
+    $fs-ref: ./euStandartUnits/list.yaml
+  post:
+    $fs-ref: ./euStandartUnits/create.yaml
+
+/v1/eu_standart_units/{id}:
+  get:
+    $fs-ref: ./euStandartUnits/view.yaml
+  put:
+    $fs-ref: ./euStandartUnits/update.yaml
+  delete:
+    $fs-ref: ./euStandartUnits/delete.yaml

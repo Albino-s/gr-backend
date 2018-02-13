@@ -1,0 +1,34 @@
+x-name: update-eu-standart-unit
+summary: Update eu_standart_unit
+tags:
+  - EU Units
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: id
+    in: path
+    description: ID of the EU Unit
+    type: string
+    required: true
+  - name: eu_standart_unit
+    in: body
+    description: new values for the EU Unit, id will be ignored
+    schema:
+      $ref: '#/definitions/EuStandartUnit'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: An updated EU Unit
+    schema:
+      $ref: '#/definitions/EuStandartUnit'
+  404:
+    description: EU Unit not found
+    schema:
+      $ref: '#/definitions/NotFoundError'
+  400:
+    description: Invalid EU Unit ID supplied
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'
