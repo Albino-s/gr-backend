@@ -19,6 +19,6 @@ responses:
     schema:
       type: array
       items:
-        $ref: '#/definitions/PantryTransactions'
+        $ref: '#/definitions/PantryTransaction'
   500:
     $ref: '#/responses/Unexpected'
