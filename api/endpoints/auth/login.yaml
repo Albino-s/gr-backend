@@ -3,15 +3,19 @@ summary: Login
 tags:
   - Auth
 parameters:
-  - name: email
-    in: query
-    type: string
-    description: the user email
-    required: true
-  - name: password
-    in: query
-    type: string
-    description: the user password
+  - name: userCredentials
+    in: body
+    description: the user email and password
+    schema:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
     required: true
 responses:
   403:

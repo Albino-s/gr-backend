@@ -30,6 +30,10 @@ export const invalidInput = message => err(message, 400);
 
 export const invalidInputError = invalidInput('Invalid input');
 
+export const invalidCredentials = message => err(message, 401);
+
+export const invalidCredentialsError = invalidCredentials('Invalid email or password');
+
 export const forbidden = message => err(message, 403);
 
 export const forbiddenError = forbidden('Forbidden');
