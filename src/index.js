@@ -5,20 +5,23 @@ import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import routes from './routes';
 import docs from './routes/docs';
-// import {auth} from 'config';
+import {auth} from 'config';
 import {customValidators, customSanitizers} from './utils/validators';
+import {decodeSecret} from './utils/functions';
+
+const {clientId, clientSecret, isEncodedSecret} = auth;
 
 sql.setDialect('mysql');
 
-// const getToken = req => {
-//   const {headers: {authorization}, query} = req;
-//   if (authorization && authorization.split(' ')[0] === 'Bearer') {
-//     return authorization.split(' ')[1];
-//   } else if (query && query.token) {
-//     return query.token;
-//   }
-//   return null;
-// };
+const getToken = req => {
+  const {headers: {authorization}, query} = req;
+  if (authorization && authorization.split(' ')[0] === 'Bearer') {
+    return authorization.split(' ')[1];
+  } else if (query && query.token) {
+    return query.token;
+  }
+  return null;
+};
 
 const setSessUser = (req, res, next) => {
   req.sess = req.sess || {};
@@ -26,11 +29,16 @@ const setSessUser = (req, res, next) => {
   next();
 };
 
-// const auth0Middleware = jwt({
-//   secret: secretCallback,
-//   getToken,
-//   algorithms: ['RS256', 'HS256']
-// }).unless({path: ['/auth/token', '/auth/signup']});
+const secretCallback = (req, header, payload, done) => {
+  const secret = decodeSecret(clientSecret, isEncodedSecret);
+  done(null, secret);
+};
+
+const authMiddleware = jwt({
+  secret: secretCallback,
+  getToken,
+  algorithms: ['RS256', 'HS256']
+}).unless({path: ['/v1/auth/login', '/v1/auth/signup', '/docs', '/docs/', '/docs/swagger.yaml']});
 
 const app = express();
 
@@ -54,7 +62,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(auth0Middleware, setSessUser);
+app.use(authMiddleware, setSessUser);
 app.use('/docs', docs);
 app.use(routes);
 

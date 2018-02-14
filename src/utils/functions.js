@@ -160,7 +160,7 @@ export const decodeSecret = (clientSecret, isEncoded) => {
   return isEncoded ? new Buffer(clientSecret, 'base64') : clientSecret;
 };
 
-export const generateToken = ({time = "48h", secret = auth.secret, email} = {}) => {
+export const generateToken = ({time = "48h", secret = auth.clientSecret, email} = {}) => {
   secret = auth.isEncodedSecret ? new Buffer(secret, 'base64') : secret;
   return jwt.sign({
     iss: "nutritiousgrocer",

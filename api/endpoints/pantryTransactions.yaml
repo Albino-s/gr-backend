@@ -1,0 +1,13 @@
+/v1/pantry_transactions:
+  get:
+    $fs-ref: ./pantryTransactions/list.yaml
+  post:
+    $fs-ref: ./pantryTransactions/create.yaml
+
+/v1/pantry_transactions/{id}:
+  get:
+    $fs-ref: ./pantryTransactions/view.yaml
+  put:
+    $fs-ref: ./pantryTransactions/update.yaml
+  delete:
+    $fs-ref: ./pantryTransactions/delete.yaml

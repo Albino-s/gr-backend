@@ -35,7 +35,7 @@ export const create = R.curry(async (pantry, sess, query) => {
 });
 
 export const update = R.curry(async (id, pantry, sess, query) => {
-  const prepare = o(R.omit(['id']));
+  const prepare = o(R.omit(['id', 'is_deleted']));
 
   return await singular.update(id, prepare(pantry), sess, query);
 });

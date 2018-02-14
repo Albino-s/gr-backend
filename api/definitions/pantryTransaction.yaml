@@ -1,0 +1,17 @@
+type: object
+properties:
+  id:
+    type: number
+  pantryId:
+    type: number
+  unit_us:
+    type: number
+  quantity_us:
+    type: number
+  action:
+    type: string
+  is_deleted:
+    type: boolean
+    default: false
+required:
+  - pantryId

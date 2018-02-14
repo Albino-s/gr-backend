@@ -3,5 +3,6 @@ $fs-ref:
   - ./users.yaml
   - ./ingredients.yaml
   - ./pantries.yaml
+  - ./pantryTransactions.yaml
   - ./euStandartUnits.yaml
   - ./usaStandartUnits.yaml

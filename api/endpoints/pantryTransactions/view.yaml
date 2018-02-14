@@ -1,0 +1,28 @@
+x-name: view-pantry-transaction
+summary: Get a pantry_transaction with a pantry_transaction ID
+tags:
+  - Pantry Transactions
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: id
+    in: path
+    description: ID of the Pantry Transaction
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: The Pantry Transaction with ID
+    schema:
+      $ref: '#/definitions/PantryTransaction'
+  404:
+    description: Pantry Transaction not found
+    schema:
+      $ref: '#/definitions/NotFoundError'
+  400:
+    description: Invalid Pantry Transaction ID supplied
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

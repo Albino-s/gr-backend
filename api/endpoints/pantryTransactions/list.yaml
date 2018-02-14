@@ -1,0 +1,24 @@
+x-name: list-pantry-transactions
+summary: Get all pantry_transactions
+tags:
+  - Pantry Transactions
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: is_deleted
+    in: query
+    description: Get deleted Pantry Transactions
+    type: number
+    enum:
+      - 0
+      - 1
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of Pantry Transactions
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/PantryTransactions'
+  500:
+    $ref: '#/responses/Unexpected'

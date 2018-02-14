@@ -1,0 +1,25 @@
+x-name: create-pantry-transaction
+summary: Create a pantry_transaction
+tags:
+  - Pantry Transactions
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: pantryTransaction
+    in: body
+    description: the Pantry Transaction JSON you want to save
+    schema:
+      $ref: '#/definitions/PantryTransaction'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new Pantry Transaction
+    schema:
+      $ref: '#/definitions/PantryTransaction'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'
