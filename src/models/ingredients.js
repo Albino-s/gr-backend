@@ -11,11 +11,15 @@ const bySearch = ({search}) => search ?
 
 const byId = ({id}) => id ? ingredients.id.equals(id) : TRUE;
 
+const byDeleted = ({is_deleted}) => is_deleted === '1' ?
+  TRUE : ingredients.is_deleted.notEqual(1);
+
 export const findAll = R.curry((httpQuery, query) => query(
   ingredients
     .select()
     .where(bySearch(httpQuery))
     .where(byId(httpQuery))
+    .where(byDeleted(httpQuery))
     .order(ingredients.id)
 ));
 

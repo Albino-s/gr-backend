@@ -1,0 +1,13 @@
+/v1/pantries:
+  get:
+    $fs-ref: ./pantries/list.yaml
+  post:
+    $fs-ref: ./pantries/create.yaml
+
+/v1/pantries/{id}:
+  get:
+    $fs-ref: ./pantries/view.yaml
+  put:
+    $fs-ref: ./pantries/update.yaml
+  delete:
+    $fs-ref: ./pantries/delete.yaml

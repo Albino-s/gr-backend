@@ -1,13 +1,17 @@
-x-name: list-ingredients
-summary: Get all ingredients
+x-name: list-pantries
+summary: Get all pantries
 tags:
-  - Ingredients
+  - Pantries
 parameters:
   - $fs-ref: ../../globals/auth-params.yaml
-  - $ref: '#/parameters/search'
+  - name: userId
+    in: query
+    type: number
+    description: Filter pantries by userId
+    required: false
   - name: is_deleted
     in: query
-    description: Get deleted ingredients
+    description: Get deleted pantries
     type: number
     enum:
       - 0
@@ -16,10 +20,10 @@ responses:
   403:
     $ref: '#/responses/Forbidden'
   200:
-    description: An array of ingredients
+    description: An array of pantries
     schema:
       type: array
       items:
-        $ref: '#/definitions/Ingredient'
+        $ref: '#/definitions/Pantry'
   500:
     $ref: '#/responses/Unexpected'

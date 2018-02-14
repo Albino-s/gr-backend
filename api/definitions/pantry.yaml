@@ -1,0 +1,21 @@
+type: object
+properties:
+  id:
+    type: number
+  userId:
+    type: number
+  productId:
+    type: number
+  unit_us:
+    type: number
+  quantity_us:
+    type: number
+  unit_eu:
+    type: number
+  quantity_eu:
+    type: number
+  is_deleted:
+    type: boolean
+    default: false
+required:
+  - userId

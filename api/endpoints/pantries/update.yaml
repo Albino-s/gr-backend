@@ -1,0 +1,34 @@
+x-name: update-pantry
+summary: Update a pantry
+tags:
+  - Pantries
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: id
+    in: path
+    description: ID of the pantry
+    type: string
+    required: true
+  - name: pantry
+    in: body
+    description: new values for the pantry, id will be ignored
+    schema:
+      $ref: '#/definitions/Pantry'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: An updated pantry
+    schema:
+      $ref: '#/definitions/Pantry'
+  404:
+    description: Pantry not found
+    schema:
+      $ref: '#/definitions/NotFoundError'
+  400:
+    description: Invalid Pantry ID supplied
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

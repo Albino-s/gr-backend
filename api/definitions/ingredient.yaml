@@ -16,6 +16,7 @@ properties:
     type: string
   is_deleted:
     type: boolean
+    default: false
   total_carbohydrates:
     type: number
   sugar:

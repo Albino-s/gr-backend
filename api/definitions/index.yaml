@@ -6,5 +6,7 @@ UsaStandartUnit:
   $fs-ref: ./usaStandartUnit.yaml
 Ingredient:
   $fs-ref: ./ingredient.yaml
+Pantry:
+  $fs-ref: ./pantry.yaml
 
 $fs-ref: ./errors.yaml
