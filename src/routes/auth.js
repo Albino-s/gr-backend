@@ -14,6 +14,9 @@ const router = new Router();
 router.post('/login', bodyType('Object'), universal.route(200, async req => {
   const {body: {email, password}} = req;
   return await my(async query => {
+    if (!email || !password) {
+      throw invalidCredentialsError;
+    }
     const user = R.head(await Users.findAll({email}, query));
     if (!user || R.isEmpty(user) || !bcrypt.compareSync(password, user.password)) {
       throw invalidCredentialsError;
