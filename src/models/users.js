@@ -30,15 +30,15 @@ const singular = universal.singular(users, findById);
 
 export const create = R.curry(async (user, sess, query) => {
   const {email, password, firstName, lastName} = user;
-  if (!password || password.trim().length < 6) {
-    throw invalidInput("Password must be at least 6 characters long");
-  }
   if (!email || !email.trim()) {
     throw invalidInput("Email is required");
   }
   const existingUsers = await findAll({email}, query);
   if (existingUsers.length) {
     throw invalidInput(`User ${email} already exists`);
+  }
+  if (!password || password.trim().length < 6) {
+    throw invalidInput("Password must be at least 6 characters long");
   }
 
   if (firstName && lastName) {
