@@ -10,3 +10,6 @@
 /v1/queries/getCountRecipesByFiltersIncludeIngredients:
   get:
     $fs-ref: ./queries/getCountRecipesByFiltersIncludeIngredients.yaml
+/v1/queries/getCountRecipesByIngredientId:
+  get:
+    $fs-ref: ./queries/getCountRecipesByIngredientId.yaml

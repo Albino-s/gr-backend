@@ -1,0 +1,27 @@
+x-name: getCountRecipesByIngredientId
+summary: getCountRecipesByIngredientId
+tags:
+  - Queries
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: recipeIds
+    in: query
+    description: recipeIds
+    type: string
+    required: true
+  - name: ingredientId
+    in: query
+    description: ingredientId
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: Query result
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

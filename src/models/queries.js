@@ -103,3 +103,15 @@ export const getCountRecipesByFiltersIncludeIngredients = R.curry((httpQuery, qu
     ) as t1`;
   return query(builQueryObj(rawQueryStr));
 });
+
+export const getCountRecipesByIngredientId = R.curry((httpQuery, query) => {
+  let {recipeIds, ingredientId} = httpQuery;
+  if (!recipeIds || !ingredientId) {
+    throw invalidInputError;
+  }
+  const rawQueryStr = `
+    SELECT count(recipes.id) as total_count from recipes
+    JOIN recipe_ingredients on recipe_ingredients.recipeId = recipes.id
+    WHERE recipes.id IN(${recipeIds}) and recipe_ingredients.ingredientId = ${ingredientId}`;
+  return query(builQueryObj(rawQueryStr));
+});

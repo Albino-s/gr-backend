@@ -1,5 +1,5 @@
-x-name: getCountRecipesByFiltersExcludeIngredients
-summary: getCountRecipesByFiltersExcludeIngredients
+x-name: getCountRecipesByFiltersIncludeIngredients
+summary: getCountRecipesByFiltersIncludeIngredients
 tags:
   - Queries
 parameters:
@@ -37,9 +37,9 @@ responses:
   403:
     $ref: '#/responses/Forbidden'
   200:
-    description: The array of the category IDs
+    description: Query result
   400:
-    description: Invalid user ID supplied
+    description: Invalid input
     schema:
       $ref: '#/definitions/InvalidParameterError'
   500:
