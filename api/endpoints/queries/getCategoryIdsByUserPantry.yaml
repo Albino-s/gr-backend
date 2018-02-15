@@ -1,0 +1,22 @@
+x-name: getCategoryIdsByUserPantry
+summary: Get category IDs by user pantry
+tags:
+  - Queries
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: userId
+    in: query
+    description: ID of the user
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: The array of the category IDs
+  400:
+    description: Invalid user ID supplied
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

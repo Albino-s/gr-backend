@@ -1,0 +1,12 @@
+/v1/queries/getCategoryIdsByUserPantry:
+  get:
+    $fs-ref: ./queries/getCategoryIdsByUserPantry.yaml
+/v1/queries/getCountRecipesByFilters:
+  get:
+    $fs-ref: ./queries/getCountRecipesByFilters.yaml
+/v1/queries/getCountRecipesByFiltersExcludeIngredients:
+  get:
+    $fs-ref: ./queries/getCountRecipesByFiltersExcludeIngredients.yaml
+/v1/queries/getCountRecipesByFiltersIncludeIngredients:
+  get:
+    $fs-ref: ./queries/getCountRecipesByFiltersIncludeIngredients.yaml

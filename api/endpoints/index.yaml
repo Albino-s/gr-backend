@@ -7,3 +7,4 @@ $fs-ref:
   - ./recipes.yaml
   - ./euStandartUnits.yaml
   - ./usaStandartUnits.yaml
+  - ./queries.yaml
