@@ -1,7 +1,7 @@
 import R from 'ramda';
 import {my} from '../utils/query';
 import {bodyType, id} from '../middlewares/validation';
-import {jail, notFoundError} from '../utils/errors';
+import {jail, notFoundError, invalidInputError} from '../utils/errors';
 import multipleView from '../views/multipleView';
 
 export default {
@@ -44,12 +44,16 @@ export default {
       ...middlewares,
       jail(async (req, res) => {
         await my(async query => {
-          req[instance] = await model.findById(req[instance].id, query);
-          if (req[instance] && !R.isEmpty(req[instance])) {
-            res.status(201).send(await view(
-              await model.update(req[instance].id, req.body, req.sess, query)));
+          if (req[instance] && req[instance].id) {
+            req[instance] = await model.findById(req[instance].id, query);
+            if (req[instance] && !R.isEmpty(req[instance])) {
+              res.status(201).send(await view(
+                await model.update(req[instance].id, req.body, req.sess, query)));
+            } else {
+              res.status(404).send(notFoundError);
+            }
           } else {
-            res.status(404).send(notFoundError);
+            throw invalidInputError;
           }
         });
       })
@@ -59,11 +63,15 @@ export default {
       ...middlewares,
       jail(async (req, res) => {
         await my(async query => {
-          req[instance] = await model.findById(req[instance].id, query);
-          if (req[instance] && !R.isEmpty(req[instance])) {
-            await model.remove(req[instance].id, useSoftDelete, req.sess, query);
+          if (req[instance] && req[instance].id) {
+            req[instance] = await model.findById(req[instance].id, query);
+            if (req[instance] && !R.isEmpty(req[instance])) {
+              await model.remove(req[instance].id, useSoftDelete, req.sess, query);
+            }
+            res.status(204).send();
+          } else {
+            throw invalidInputError;
           }
-          res.status(204).send();
         });
       })
     ]
