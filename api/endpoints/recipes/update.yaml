@@ -1,33 +1,33 @@
-x-name: update-user
-summary: Update a user
+x-name: update-recipe
+summary: Update a recipe
 tags:
-  - Users
+  - Recipes
 parameters:
   - $fs-ref: ../../globals/auth-params.yaml
   - name: id
     in: path
-    description: ID of the user
+    description: ID of the recipe
     type: string
     required: true
-  - name: user
+  - name: recipe
     in: body
-    description: new values for the user, id and email will be ignored
+    description: new values for the recipe, id will be ignored
     schema:
-      $ref: '#/definitions/User'
+      $ref: '#/definitions/Recipe'
     required: true
 responses:
   403:
     $ref: '#/responses/Forbidden'
   201:
-    description: An updated user
+    description: An updated recipe
     schema:
-      $ref: '#/definitions/User'
+      $ref: '#/definitions/Recipe'
   404:
-    description: User not found
+    description: Recipe not found
     schema:
       $ref: '#/definitions/NotFoundError'
   400:
-    description: Invalid user ID supplied
+    description: Invalid Recipe ID supplied
     schema:
       $ref: '#/definitions/InvalidParameterError'
   500:

@@ -1,0 +1,13 @@
+/v1/recipes:
+  get:
+    $fs-ref: ./recipes/list.yaml
+  post:
+    $fs-ref: ./recipes/create.yaml
+
+/v1/recipes/{id}:
+  get:
+    $fs-ref: ./recipes/view.yaml
+  put:
+    $fs-ref: ./recipes/update.yaml
+  delete:
+    $fs-ref: ./recipes/delete.yaml

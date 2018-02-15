@@ -1,0 +1,32 @@
+type: object
+properties:
+  id:
+    type: number
+  name:
+    type: string
+  description:
+    type: string
+  photo:
+    type: string
+  difficulty:
+    type: number
+  rating:
+    type: number
+  prep_time:
+    type: string
+  cook_time:
+    type: string
+  servings:
+    type: number
+  instructions:
+    type: string
+  ingredient_count:
+    type: number
+  is_hidden:
+    type: boolean
+    default: false
+  is_deleted:
+    type: boolean
+    default: false
+required:
+  - name

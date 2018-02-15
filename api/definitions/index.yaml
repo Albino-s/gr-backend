@@ -8,6 +8,8 @@ Ingredient:
   $fs-ref: ./ingredient.yaml
 Pantry:
   $fs-ref: ./pantry.yaml
+Recipe:
+  $fs-ref: ./recipe.yaml
 PantryTransaction:
   $fs-ref: ./pantryTransaction.yaml
 

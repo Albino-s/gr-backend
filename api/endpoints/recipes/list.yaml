@@ -1,0 +1,25 @@
+x-name: list-recipes
+summary: Get all recipes
+tags:
+  - Recipes
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - $ref: '#/parameters/search'
+  - name: is_deleted
+    in: query
+    description: Get deleted recipes
+    type: number
+    enum:
+      - 0
+      - 1
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of recipes
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Recipe'
+  500:
+    $ref: '#/responses/Unexpected'
