@@ -51,9 +51,13 @@ export const create = R.curry(async (user, sess, query) => {
 });
 
 export const update = R.curry(async (id, userSeed, sess, query) => {
-  const prepare = o(R.omit(['id']));
-  if (userSeed.password.trim() && userSeed.password.trim().length > 5) {
-    userSeed.password = bcrypt.hashSync(userSeed.password.trim(), 10);
+  const prepare = o(R.omit(['id', 'email']));
+  if (userSeed.password) {
+    if (userSeed.password.trim() && userSeed.password.trim().length > 5) {
+      userSeed.password = bcrypt.hashSync(userSeed.password.trim(), 10);
+    } else {
+      throw invalidInput("Password must be at least 6 characters long");
+    }
   }
   return await singular.update(id, prepare(userSeed), sess, query);
 });
