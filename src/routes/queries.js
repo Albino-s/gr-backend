@@ -21,6 +21,15 @@ router
   // SQL queries part 2;
   .get('/getCountRecipesByIngredientId', jail(async (req, res) => {
     res.send(await my(Queries.getCountRecipesByIngredientId({...req.query})));
+  }))
+  .get('/getCountRecipesByIngredients', jail(async (req, res) => {
+    res.send(await my(Queries.getCountRecipesByIngredients({...req.query})));
+  }))
+  .get('/getCountRecipesByTags', jail(async (req, res) => {
+    res.send(await my(Queries.getCountRecipesByTags({...req.query})));
+  }))
+  .get('/getCountRecipesByTime', jail(async (req, res) => {
+    res.send(await my(Queries.getCountRecipesByTime({...req.query})));
   }));
 
 export default router;

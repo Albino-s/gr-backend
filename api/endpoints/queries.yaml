@@ -13,3 +13,12 @@
 /v1/queries/getCountRecipesByIngredientId:
   get:
     $fs-ref: ./queries/getCountRecipesByIngredientId.yaml
+/v1/queries/getCountRecipesByIngredients:
+  get:
+    $fs-ref: ./queries/getCountRecipesByIngredients.yaml
+/v1/queries/getCountRecipesByTags:
+  get:
+    $fs-ref: ./queries/getCountRecipesByTags.yaml
+/v1/queries/getCountRecipesByTime:
+  get:
+    $fs-ref: ./queries/getCountRecipesByTime.yaml

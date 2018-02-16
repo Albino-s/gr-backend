@@ -115,3 +115,72 @@ export const getCountRecipesByIngredientId = R.curry((httpQuery, query) => {
     WHERE recipes.id IN(${recipeIds}) and recipe_ingredients.ingredientId = ${ingredientId}`;
   return query(builQueryObj(rawQueryStr));
 });
+
+export const getCountRecipesByIngredients = R.curry((httpQuery, query) => {
+  let {withIngredientIds, countWithIngredients, search, time, withoutIngredientIds} = httpQuery;
+  if (!withIngredientIds || !countWithIngredients || !time || !withoutIngredientIds) {
+    throw invalidInputError;
+  }
+  search = search || '';
+  const rawQueryStr = `
+    Select count(1) as totalRecipes from
+    (SELECT
+    (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipeId
+    WHERE recipe_ingredients.ingredientId IN(${withIngredientIds})
+    and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
+      OR recipes.description LIKE '%${search}%')
+    and (recipes.prep_time + recipes.cook_time) <= ${time}
+    and recipes.id NOT IN(Select recipe_ingredients.recipeId from recipe_ingredients
+    WHERE recipe_ingredients.ingredientId IN(${withoutIngredientIds}))
+    GROUP BY recipes.id
+    HAVING COUNT(recipe_ingredients.ingredientId) = ${countWithIngredients}) as t1`;
+  return query(builQueryObj(rawQueryStr));
+});
+
+export const getCountRecipesByTags = R.curry((httpQuery, query) => {
+  let {tagIds, countTags, search, time} = httpQuery;
+  if (!tagIds || !countTags || !time) {
+    throw invalidInputError;
+  }
+  search = search || '';
+  const rawQueryStr = `
+    Select count(1) as totalRecipes from
+    (SELECT
+    (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
+    Where recipe_tags.tagId IN(${tagIds})
+    and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
+      OR recipes.description LIKE '%${search}%')
+    and (recipes.prep_time + recipes.cook_time) <= ${time}
+    GROUP BY recipes.id
+    HAVING COUNT(recipe_tags.tagId) = ${countTags}) as t1`;
+  return query(builQueryObj(rawQueryStr));
+});
+
+export const getCountRecipesByTime = R.curry((httpQuery, query) => {
+  let {time, search} = httpQuery;
+  if (!time) {
+    throw invalidInputError;
+  }
+  search = search || '';
+  const rawQueryStr = `
+    Select count(1) as totalRecipes from
+    (SELECT
+    (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    WHERE (recipes.prep_time + recipes.cook_time) <= ${time}
+    and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
+      OR recipes.description LIKE '%${search}%')) as t1`;
+  return query(builQueryObj(rawQueryStr));
+});
+
+// export const name = R.curry((httpQuery, query) => {
+//   let {} = httpQuery;
+//   if (!) {
+//     throw invalidInputError;
+//   }
+//   const rawQueryStr = `
+
+//     `;
+//   return query(builQueryObj(rawQueryStr));
+// });

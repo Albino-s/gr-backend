@@ -1,0 +1,36 @@
+x-name: getCountRecipesByTags
+summary: getCountRecipesByTags
+tags:
+  - Queries
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: tagIds
+    in: query
+    description: tagIds
+    type: string
+    required: true
+  - name: countTags
+    in: query
+    description: countTags
+    type: string
+    required: true
+  - name: search
+    in: query
+    description: search
+    type: string
+  - name: time
+    in: query
+    description: time
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: Query result
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'
