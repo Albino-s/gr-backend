@@ -22,3 +22,15 @@
 /v1/queries/getCountRecipesByTime:
   get:
     $fs-ref: ./queries/getCountRecipesByTime.yaml
+/v1/queries/getCountRecipesByWithIngredients:
+  get:
+    $fs-ref: ./queries/getCountRecipesByWithIngredients.yaml
+/v1/queries/getCountRecipesByWithoutIngredients:
+  get:
+    $fs-ref: ./queries/getCountRecipesByWithoutIngredients.yaml
+/v1/queries/getIngredientIdsWithProduct:
+  get:
+    $fs-ref: ./queries/getIngredientIdsWithProduct.yaml
+/v1/queries/getListIngredients:
+  get:
+    $fs-ref: ./queries/getListIngredients.yaml
