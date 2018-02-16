@@ -45,6 +45,19 @@ router
   }))
   .get('/getListIngredients', jail(async (req, res) => {
     res.send(await my(ListQueries.getListIngredients({...req.query})));
+  }))
+  // SQL queries part 4;
+  .get('/getListPantriesByIngredientIds', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListPantriesByIngredientIds({...req.query})));
+  }))
+  .get('/getListPantriesByUserId', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListPantriesByUserId({...req.query})));
+  }))
+  .get('/getListProductByWithoutIngredientIds', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListProductByWithoutIngredientIds({...req.query})));
+  }))
+  .get('/getListProductsFromPantryByUserId', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListProductsFromPantryByUserId({...req.query})));
   }));
 
 export default router;

@@ -34,3 +34,15 @@
 /v1/queries/getListIngredients:
   get:
     $fs-ref: ./queries/getListIngredients.yaml
+/v1/queries/getListPantriesByIngredientIds:
+  get:
+    $fs-ref: ./queries/getListPantriesByIngredientIds.yaml
+/v1/queries/getListPantriesByUserId:
+  get:
+    $fs-ref: ./queries/getListPantriesByUserId.yaml
+/v1/queries/getListProductByWithoutIngredientIds:
+  get:
+    $fs-ref: ./queries/getListProductByWithoutIngredientIds.yaml
+/v1/queries/getListProductsFromPantryByUserId:
+  get:
+    $fs-ref: ./queries/getListProductsFromPantryByUserId.yaml
