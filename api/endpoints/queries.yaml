@@ -46,3 +46,27 @@
 /v1/queries/getListProductsFromPantryByUserId:
   get:
     $fs-ref: ./queries/getListProductsFromPantryByUserId.yaml
+/v1/queries/getListRecipesByIds:
+  get:
+    $fs-ref: ./queries/getListRecipesByIds.yaml
+/v1/queries/getListRecipesByIngredientIds:
+  get:
+    $fs-ref: ./queries/getListRecipesByIngredientIds.yaml
+/v1/queries/getListRecipesWithSearchForWebAdmin:
+  get:
+    $fs-ref: ./queries/getListRecipesWithSearchForWebAdmin.yaml
+/v1/queries/getListTags:
+  get:
+    $fs-ref: ./queries/getListTags.yaml
+/v1/queries/getListUnits:
+  get:
+    $fs-ref: ./queries/getListUnits.yaml
+/v1/queries/getMinMaxCookTimes:
+  get:
+    $fs-ref: ./queries/getMinMaxCookTimes.yaml
+/v1/queries/getProductFromPantryById:
+  get:
+    $fs-ref: ./queries/getProductFromPantryById.yaml
+/v1/queries/getProductsByIngredientIds:
+  get:
+    $fs-ref: ./queries/getProductsByIngredientIds.yaml

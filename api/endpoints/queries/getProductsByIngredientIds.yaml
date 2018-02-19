@@ -1,0 +1,26 @@
+x-name: getProductsByIngredientIds
+summary: getProductsByIngredientIds
+tags:
+  - Queries
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: ingredientIds
+    in: query
+    description: ingredientIds
+    type: string
+    required: true
+  - name: nameStore
+    in: query
+    description: nameStore
+    type: string
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: Query result
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

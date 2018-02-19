@@ -1,0 +1,22 @@
+x-name: getListUnits
+summary: getListUnits
+tags:
+  - Queries
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: objectName
+    in: query
+    description: objectName
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: Query result
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

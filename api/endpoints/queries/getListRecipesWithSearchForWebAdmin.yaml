@@ -1,0 +1,31 @@
+x-name: getListRecipesWithSearchForWebAdmin
+summary: getListRecipesWithSearchForWebAdmin
+tags:
+  - Queries
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: search
+    in: query
+    description: search
+    type: string
+  - name: pageSize
+    in: query
+    description: pageSize
+    type: string
+    required: true
+  - name: pageNumber
+    in: query
+    description: pageNumber
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: Query result
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

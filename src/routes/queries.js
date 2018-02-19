@@ -58,6 +58,32 @@ router
   }))
   .get('/getListProductsFromPantryByUserId', jail(async (req, res) => {
     res.send(await my(ListQueries.getListProductsFromPantryByUserId({...req.query})));
+  }))
+  // SQL queries part 5;
+  .get('/getListRecipesByIds', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListRecipesByIds({...req.query})));
+  }))
+  .get('/getListRecipesByIngredientIds', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListRecipesByIngredientIds({...req.query})));
+  }))
+  .get('/getListRecipesWithSearchForWebAdmin', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListRecipesWithSearchForWebAdmin({...req.query})));
+  }))
+  .get('/getListTags', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListTags({...req.query})));
+  }))
+  // SQL queries part 6;
+  .get('/getListUnits', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListUnits({...req.query})));
+  }))
+  .get('/getMinMaxCookTimes', jail(async (req, res) => {
+    res.send(await my(Queries.getMinMaxCookTimes({...req.query})));
+  }))
+  .get('/getProductFromPantryById', jail(async (req, res) => {
+    res.send(await my(Queries.getProductFromPantryById({...req.query})));
+  }))
+  .get('/getProductsByIngredientIds', jail(async (req, res) => {
+    res.send(await my(Queries.getProductsByIngredientIds({...req.query})));
   }));
 
 export default router;
