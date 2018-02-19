@@ -60,6 +60,20 @@ export const getProductsByIngredientIds = R.curry((httpQuery, query) => {
   return query(builQueryObj(rawQueryStr));
 });
 
+export const getQuickAndEasyRecipes = R.curry((httpQuery, query) => {
+  let {pageSize, pageNumber} = httpQuery;
+  if (!pageSize || !pageNumber) {
+    throw invalidInputError;
+  }
+  const rawQueryStr = `
+    SELECT *,
+    (select count(id) from recipes) as total_count,
+    (prep_time + cook_time) as total_time from recipes
+    ORDER BY total_time ASC
+    LIMIT ${pageNumber}, ${pageSize}`;
+  return query(builQueryObj(rawQueryStr));
+});
+
 // export const name = R.curry((httpQuery, query) => {
 //   let {} = httpQuery;
 //   if (!) {

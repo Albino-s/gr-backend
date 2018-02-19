@@ -2,6 +2,7 @@ import {Router} from 'express';
 import * as Queries from '../models/queries';
 import * as CountQueries from '../models/queriesCount';
 import * as ListQueries from '../models/queriesList';
+import * as RecipesQueries from '../models/queriesRecipes';
 import {jail} from '../utils/errors';
 import {my} from '../utils/query';
 
@@ -84,6 +85,19 @@ router
   }))
   .get('/getProductsByIngredientIds', jail(async (req, res) => {
     res.send(await my(Queries.getProductsByIngredientIds({...req.query})));
+  }))
+  // SQL queries part 7;
+  .get('/getQuickAndEasyRecipes', jail(async (req, res) => {
+    res.send(await my(Queries.getQuickAndEasyRecipes({...req.query})));
+  }))
+  .get('/getRecipeIngredientsByIngredientIds', jail(async (req, res) => {
+    res.send(await my(RecipesQueries.getRecipeIngredientsByIngredientIds({...req.query})));
+  }))
+  .get('/getRecipesByFilters', jail(async (req, res) => {
+    res.send(await my(RecipesQueries.getRecipesByFilters({...req.query})));
+  }))
+  .get('/getRecipesByFiltersExcludeIngredients', jail(async (req, res) => {
+    res.send(await my(RecipesQueries.getRecipesByFiltersExcludeIngredients({...req.query})));
   }));
 
 export default router;

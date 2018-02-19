@@ -70,3 +70,15 @@
 /v1/queries/getProductsByIngredientIds:
   get:
     $fs-ref: ./queries/getProductsByIngredientIds.yaml
+/v1/queries/getQuickAndEasyRecipes:
+  get:
+    $fs-ref: ./queries/getQuickAndEasyRecipes.yaml
+/v1/queries/getRecipeIngredientsByIngredientIds:
+  get:
+    $fs-ref: ./queries/getRecipeIngredientsByIngredientIds.yaml
+/v1/queries/getRecipesByFilters:
+  get:
+    $fs-ref: ./queries/getRecipesByFilters.yaml
+/v1/queries/getRecipesByFiltersExcludeIngredients:
+  get:
+    $fs-ref: ./queries/getRecipesByFiltersExcludeIngredients.yaml
