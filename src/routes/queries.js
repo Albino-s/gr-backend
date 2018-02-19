@@ -98,6 +98,19 @@ router
   }))
   .get('/getRecipesByFiltersExcludeIngredients', jail(async (req, res) => {
     res.send(await my(RecipesQueries.getRecipesByFiltersExcludeIngredients({...req.query})));
+  }))
+  // SQL queries part 8;
+  .get('/getRecipesByFiltersIncludeIngredients', jail(async (req, res) => {
+    res.send(await my(RecipesQueries.getRecipesByFiltersIncludeIngredients({...req.query})));
+  }))
+  .get('/getRecipesByIngredients', jail(async (req, res) => {
+    res.send(await my(RecipesQueries.getRecipesByIngredients({...req.query})));
+  }))
+  .get('/getRecipesByTags', jail(async (req, res) => {
+    res.send(await my(RecipesQueries.getRecipesByTags({...req.query})));
+  }))
+  .get('/getRecipesByTime', jail(async (req, res) => {
+    res.send(await my(RecipesQueries.getRecipesByTime({...req.query})));
   }));
 
 export default router;

@@ -82,3 +82,15 @@
 /v1/queries/getRecipesByFiltersExcludeIngredients:
   get:
     $fs-ref: ./queries/getRecipesByFiltersExcludeIngredients.yaml
+/v1/queries/getRecipesByFiltersIncludeIngredients:
+  get:
+    $fs-ref: ./queries/getRecipesByFiltersIncludeIngredients.yaml
+/v1/queries/getRecipesByIngredients:
+  get:
+    $fs-ref: ./queries/getRecipesByIngredients.yaml
+/v1/queries/getRecipesByTags:
+  get:
+    $fs-ref: ./queries/getRecipesByTags.yaml
+/v1/queries/getRecipesByTime:
+  get:
+    $fs-ref: ./queries/getRecipesByTime.yaml
