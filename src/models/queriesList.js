@@ -176,15 +176,3 @@ export const getListUnits = R.curry((httpQuery, query) => {
     SELECT * from ${objectName}`;
   return query(builQueryObj(rawQueryStr));
 });
-
-// export const name = R.curry((httpQuery, query) => {
-//   let {} = httpQuery;
-//   if (!) {
-//     throw invalidInputError;
-//   }
-//   search = search || '';
-//   const rawQueryStr = `
-
-//     `;
-//   return query(builQueryObj(rawQueryStr));
-// });

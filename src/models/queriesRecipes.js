@@ -157,14 +157,40 @@ export const getRecipesByTime = R.curry((httpQuery, query) => {
   return query(builQueryObj(rawQueryStr));
 });
 
-// export const name = R.curry((httpQuery, query) => {
-//   let {} = httpQuery;
-//   if (!) {
-//     throw invalidInputError;
-//   }
-//   search = search || '';
-//   const rawQueryStr = `
+export const getRecipesByWithIngredients = R.curry((httpQuery, query) => {
+  let {withIngredientIds, countWithIngredients, pageNumber, pageSize, search, time} = httpQuery;
+  if (!withIngredientIds || !countWithIngredients || !pageNumber || !pageSize || !time) {
+    throw invalidInputError;
+  }
+  search = search || '';
+  const rawQueryStr = `
+    SELECT *, (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipeId
+    WHERE recipe_ingredients.ingredientId IN(${withIngredientIds})
+    and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
+    OR recipes.description LIKE '%${search}%')
+    and (recipes.prep_time + recipes.cook_time) <= ${time}
+    GROUP BY recipes.id
+    HAVING COUNT(recipe_ingredients.ingredientId) = ${countWithIngredients}
+    ORDER BY total_time ASC
+    LIMIT ${pageNumber}, ${pageSize}`;
+  return query(builQueryObj(rawQueryStr));
+});
 
-//     `;
-//   return query(builQueryObj(rawQueryStr));
-// });
+export const getRecipesByWithoutIngredients = R.curry((httpQuery, query) => {
+  let {withoutIngredientIds, search, time, pageNumber, pageSize} = httpQuery;
+  if (!withoutIngredientIds || !time || !pageNumber || !pageSize) {
+    throw invalidInputError;
+  }
+  search = search || '';
+  const rawQueryStr = `
+    SELECT *, (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    WHERE recipes.id NOT IN(Select recipe_ingredients.recipeId from recipe_ingredients
+    WHERE recipe_ingredients.ingredientId IN(${withoutIngredientIds}))
+    and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
+    OR recipes.description LIKE '%${search}%')
+    and (recipes.prep_time + recipes.cook_time) <= ${time}
+    ORDER BY total_time ASC
+    LIMIT ${pageNumber}, ${pageSize}`;
+  return query(builQueryObj(rawQueryStr));
+});

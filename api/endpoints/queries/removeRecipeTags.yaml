@@ -1,0 +1,27 @@
+x-name: removeRecipeTags
+summary: removeRecipeTags
+tags:
+  - Queries
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: recipeId
+    in: query
+    description: recipeId
+    type: string
+    required: true
+  - name: tagIds
+    in: query
+    description: tagIds
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  204:
+    description: Query result
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

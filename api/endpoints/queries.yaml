@@ -94,3 +94,18 @@
 /v1/queries/getRecipesByTime:
   get:
     $fs-ref: ./queries/getRecipesByTime.yaml
+/v1/queries/getRecipesByWithIngredients:
+  get:
+    $fs-ref: ./queries/getRecipesByWithIngredients.yaml
+/v1/queries/getRecipesByWithoutIngredients:
+  get:
+    $fs-ref: ./queries/getRecipesByWithoutIngredients.yaml
+/v1/queries/getUnitIngredientFromRecipe:
+  get:
+    $fs-ref: ./queries/getUnitIngredientFromRecipe.yaml
+/v1/queries/searchRecipesByTotalTime:
+  get:
+    $fs-ref: ./queries/searchRecipesByTotalTime.yaml
+/v1/queries/removeRecipeTags:
+  delete:
+    $fs-ref: ./queries/removeRecipeTags.yaml

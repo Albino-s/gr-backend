@@ -74,14 +74,44 @@ export const getQuickAndEasyRecipes = R.curry((httpQuery, query) => {
   return query(builQueryObj(rawQueryStr));
 });
 
-// export const name = R.curry((httpQuery, query) => {
-//   let {} = httpQuery;
-//   if (!) {
-//     throw invalidInputError;
-//   }
-//   search = search || '';
-//   const rawQueryStr = `
+export const getUnitIngredientFromRecipe = R.curry((httpQuery, query) => {
+  let {ingredientId, unit_us} = httpQuery;
+  if (!ingredientId || !unit_us) {
+    throw invalidInputError;
+  }
+  const rawQueryStr = `
+    SELECT recipe_ingredients.quantity_eu, recipe_ingredients.unit_eu,
+    recipe_ingredients.quantity_us from ingredients
+    JOIN recipe_ingredients on recipe_ingredients.ingredientId = ingredients.id
+    WHERE ingredients.id = ${ingredientId} and recipe_ingredients.unit_us = ${unit_us}
+    Limit 1`;
+  return query(builQueryObj(rawQueryStr));
+});
 
-//     `;
-//   return query(builQueryObj(rawQueryStr));
-// });
+export const searchRecipesByTotalTime = R.curry((httpQuery, query) => {
+  let {search, pageNumber, pageSize} = httpQuery;
+  if (!pageNumber || !pageSize) {
+    throw invalidInputError;
+  }
+  search = search || '';
+  const rawQueryStr = `
+    SELECT *, (select count(id) from recipes WHERE name  LIKE '%${search}%' OR instructions
+    LIKE '%${search}%' OR description LIKE '%${search}%') as total_count,
+    (prep_time + cook_time) as total_time from recipes
+    WHERE name  LIKE '%${search}%' OR instructions LIKE '%${search}%'
+    OR description LIKE '%${search}%'
+    ORDER BY total_time ASC
+    LIMIT ${pageNumber}, ${pageSize}`;
+  return query(builQueryObj(rawQueryStr));
+});
+
+export const removeRecipeTags = R.curry((httpQuery, query) => {
+  let {recipeId, tagIds} = httpQuery;
+  if (!recipeId || !tagIds) {
+    throw invalidInputError;
+  }
+  const rawQueryStr = `
+    Delete from recipe_tags
+    where recipeId = ${recipeId} and tagId IN (${tagIds})`;
+  return query(builQueryObj(rawQueryStr));
+});

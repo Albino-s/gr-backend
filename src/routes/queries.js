@@ -111,6 +111,22 @@ router
   }))
   .get('/getRecipesByTime', jail(async (req, res) => {
     res.send(await my(RecipesQueries.getRecipesByTime({...req.query})));
+  }))
+  // SQL queries part 9;
+  .get('/getRecipesByWithIngredients', jail(async (req, res) => {
+    res.send(await my(RecipesQueries.getRecipesByWithIngredients({...req.query})));
+  }))
+  .get('/getRecipesByWithoutIngredients', jail(async (req, res) => {
+    res.send(await my(RecipesQueries.getRecipesByWithoutIngredients({...req.query})));
+  }))
+  .get('/getUnitIngredientFromRecipe', jail(async (req, res) => {
+    res.send(await my(Queries.getUnitIngredientFromRecipe({...req.query})));
+  }))
+  .get('/searchRecipesByTotalTime', jail(async (req, res) => {
+    res.send(await my(Queries.searchRecipesByTotalTime({...req.query})));
+  }))
+  .delete('/removeRecipeTags', jail(async (req, res) => {
+    res.send(await my(Queries.removeRecipeTags({...req.query})));
   }));
 
 export default router;
