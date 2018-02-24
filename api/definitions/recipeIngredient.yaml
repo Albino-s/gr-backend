@@ -1,0 +1,21 @@
+type: object
+properties:
+  id:
+    type: number
+  recipeId:
+    type: number
+  ingredientId:
+    type: number
+  unit_us:
+    type: number
+  quantity_us:
+    type: number
+  unit_eu:
+    type: number
+  quantity_eu:
+    type: number
+  notes:
+    type: string
+required:
+  - recipeId
+  - ingredientId

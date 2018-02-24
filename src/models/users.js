@@ -51,7 +51,7 @@ export const create = R.curry(async (user, sess, query) => {
 });
 
 export const update = R.curry(async (id, userSeed, sess, query) => {
-  const prepare = o(R.omit(['id', 'email']));
+  const prepare = o(R.omit(['id', 'email', 'modified']));
   if (userSeed.password) {
     if (userSeed.password.trim() && userSeed.password.trim().length > 5) {
       userSeed.password = bcrypt.hashSync(userSeed.password.trim(), 10);

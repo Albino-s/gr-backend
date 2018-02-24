@@ -1,0 +1,13 @@
+/v1/recipe_ingredients:
+  get:
+    $fs-ref: ./recipeIngredients/list.yaml
+  post:
+    $fs-ref: ./recipeIngredients/create.yaml
+
+/v1/recipe_ingredients/{id}:
+  get:
+    $fs-ref: ./recipeIngredients/view.yaml
+  put:
+    $fs-ref: ./recipeIngredients/update.yaml
+  delete:
+    $fs-ref: ./recipeIngredients/delete.yaml

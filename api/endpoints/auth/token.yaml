@@ -1,0 +1,17 @@
+x-name: refresh-token
+summary: Refresh Token
+tags:
+  - Auth
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: User data with a new token
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

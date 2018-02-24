@@ -5,6 +5,7 @@ $fs-ref:
   - ./pantries.yaml
   - ./pantryTransactions.yaml
   - ./recipes.yaml
+  - ./recipeIngredients.yaml
   - ./euStandartUnits.yaml
   - ./usaStandartUnits.yaml
   - ./queries.yaml

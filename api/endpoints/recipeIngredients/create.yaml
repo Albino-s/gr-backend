@@ -1,0 +1,25 @@
+x-name: create-recipe-ingredient
+summary: Create a recipe_ingredient
+tags:
+  - Recipe Ingredients
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: recipeIngredient
+    in: body
+    description: the Recipe Ingredient JSON you want to save
+    schema:
+      $ref: '#/definitions/RecipeIngredient'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new Recipe Ingredient
+    schema:
+      $ref: '#/definitions/RecipeIngredient'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

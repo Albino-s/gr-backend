@@ -25,6 +25,20 @@ router.post('/login', bodyType('Object'), universal.route(200, async req => {
   });
 }));
 
+router.post('/token', bodyType('Object'), universal.route(200, async req => {
+  const {sess: {email}} = req;
+  return await my(async query => {
+    if (!email) {
+      throw invalidCredentialsError;
+    }
+    const user = R.head(await Users.findAll({email}, query));
+    if (!user || R.isEmpty(user)) {
+      throw invalidCredentialsError;
+    }
+    return {...userView(user), access_token: generateToken({email: user.email})};
+  });
+}));
+
 router.post('/signup', bodyType('Object'), universal.route(201, async req => {
   return await my(async query => {
     const user = await Users.create(req.body, req.sess, query);
