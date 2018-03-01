@@ -23,7 +23,6 @@ export const findAll = R.curry((httpQuery, query) => {
         .select()
         .where(byId(httpQuery))
         .where(byRecipeId(httpQuery))
-        .where(byDeleted(httpQuery))
         .order(recipeTags.id));
   } else {
     result = query(

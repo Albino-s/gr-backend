@@ -118,3 +118,9 @@
 /v1/queries/getQuickAndEasyRecipesWithoutFavorite:
   get:
     $fs-ref: ./queries/getQuickAndEasyRecipesWithoutFavorite.yaml
+/v1/queries/getNutrition:
+  get:
+    $fs-ref: ./queries/getNutrition.yaml
+/v1/queries/removeRecipeFavorite:
+  get:
+    $fs-ref: ./queries/removeRecipeFavorite.yaml

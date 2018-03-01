@@ -1,0 +1,32 @@
+x-name: getNutrition
+summary: getNutrition
+tags:
+  - Queries
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: intervalStart
+    in: query
+    description: intervalStart
+    type: string
+    required: true
+  - name: intervalEnd
+    in: query
+    description: intervalEnd
+    type: string
+    required: true
+  - name: userId
+    in: query
+    description: userId
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: Query result
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

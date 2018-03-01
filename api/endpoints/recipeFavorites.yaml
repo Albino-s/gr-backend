@@ -1,0 +1,13 @@
+/v1/recipe_favorites:
+  get:
+    $fs-ref: ./recipeFavorites/list.yaml
+  post:
+    $fs-ref: ./recipeFavorites/create.yaml
+
+/v1/recipe_favorites/{id}:
+  get:
+    $fs-ref: ./recipeFavorites/view.yaml
+  put:
+    $fs-ref: ./recipeFavorites/update.yaml
+  delete:
+    $fs-ref: ./recipeFavorites/delete.yaml

@@ -131,6 +131,48 @@ export const getQuickAndEasyRecipesWithoutFavorite = R.curry((httpQuery, query) 
   return query(builQueryObj(rawQueryStr));
 });
 
+export const getNutrition = R.curry((httpQuery, query) => {
+  let {userId, intervalStart, intervalEnd} = httpQuery;
+  if (!userId || !intervalStart || !intervalEnd) {
+    throw invalidInputError;
+  }
+  const rawQueryStr = `
+    SELECT sum(recipe_nutritions.calcium) as calcium,
+      sum(recipe_nutritions.calories) as calories,
+      sum(recipe_nutritions.calories_from_fat) as calories_from_fat,
+      sum(recipe_nutritions.total_fat) as total_fat,
+      sum(recipe_nutritions.saturated_fat) as saturated_fat,
+      sum(recipe_nutritions.trans_fat) as trans_fat,
+      sum(recipe_nutritions.cholesterol) as cholesterol,
+      sum(recipe_nutritions.sodium) as sodium,
+      sum(recipe_nutritions.potassium) as potassium,
+      sum(recipe_nutritions.total_carbohydrates) as total_carbohydrates,
+      sum(recipe_nutritions.dietary_fiber) as dietary_fiber,
+      sum(recipe_nutritions.sugar) as sugar,
+      sum(recipe_nutritions.protein) as protein,
+      sum(recipe_nutritions.vitamin_a) as vitamin_a,
+      sum(recipe_nutritions.vitamin_c) as vitamin_c,
+      sum(recipe_nutritions.iron) as iron,
+      sum(recipe_nutritions.servings) as servings from recipe_histories
+      JOIN recipe_nutritions on recipe_nutritions.recipeId = recipe_histories.recipeId
+      WHERE userId = ${userId}
+             and recipe_servings <> 0
+             and recipe_histories.createdAt > '${intervalStart}'
+             and recipe_histories.createdAt < '${intervalEnd}'`;
+  return query(builQueryObj(rawQueryStr));
+});
+
+export const removeRecipeFavorite = R.curry((httpQuery, query) => {
+  let {recipeId, userId} = httpQuery;
+  if (!userId || !recipeId) {
+    throw invalidInputError;
+  }
+  const rawQueryStr = `
+    Delete from recipe_favorites
+    Where userId = ${userId} AND recipeId = ${recipeId}`;
+  return query(builQueryObj(rawQueryStr));
+});
+
 // ================= unused queries ==============//
 // getListCategories
 // SELECT * from product_categories
@@ -166,57 +208,4 @@ export const getQuickAndEasyRecipesWithoutFavorite = R.curry((httpQuery, query) 
 // Where (products.name  LIKE '%{{search}}%')
 // ORDER BY products.name ASC
 // LIMIT {{pageNumber}}, {{pageSize}}
-// -------------------------------------------------------
-// getListRecipeFavoriteIds
-// userId
-// SELECT recipeId from recipe_favorites
-// where userId = {{userId}}
-// ------------------------------------------------------------
-// getListRecipeFavorites
-// userId, pageNumber, pageSize
-// SELECT recipes.*,
-// (recipes.prep_time + recipes.cook_time) as total_time from recipes
-
-// JOIN recipe_favorites ON recipes.id = recipe_favorites.recipeId
-// where recipe_favorites.userId = {{userId}}
-
-/* WHERE recipe_ingredients.ingredientId IN({{withIngredientIds}})
-and (recipes.name  LIKE '%{{search}}%' OR recipes.instructions LIKE '%{{search}}%'
-OR recipes.description LIKE '%{{search}}%')
-and (recipes.prep_time + recipes.cook_time) <= {{time}}
-GROUP BY recipes.id
-HAVING COUNT(recipe_ingredients.ingredientId) = {{countWithIngredients}} */
-
-// ORDER BY total_time ASC
-// LIMIT {{pageNumber}}, {{pageSize}}
 // ---------------------------------------------------------------
-// getNutrition
-// userId, intervalStart, intervalEnd
-// SELECT sum(recipe_nutritions.calcium) as calcium,
-//  sum(recipe_nutritions.calories) as calories,
-//  sum(recipe_nutritions.calories_from_fat) as calories_from_fat,
-//  sum(recipe_nutritions.total_fat) as total_fat,
-//  sum(recipe_nutritions.saturated_fat) as saturated_fat,
-//  sum(recipe_nutritions.trans_fat) as trans_fat,
-//  sum(recipe_nutritions.cholesterol) as cholesterol,
-//  sum(recipe_nutritions.sodium) as sodium,
-//  sum(recipe_nutritions.potassium) as potassium,
-//  sum(recipe_nutritions.total_carbohydrates) as total_carbohydrates,
-//  sum(recipe_nutritions.dietary_fiber) as dietary_fiber,
-//  sum(recipe_nutritions.sugar) as sugar,
-//  sum(recipe_nutritions.protein) as protein,
-//  sum(recipe_nutritions.vitamin_a) as vitamin_a,
-//  sum(recipe_nutritions.vitamin_c) as vitamin_c,
-//  sum(recipe_nutritions.iron) as iron,
-//  sum(recipe_nutritions.servings) as servings from recipe_histories
-// JOIN recipe_nutritions on recipe_nutritions.recipeId = recipe_histories.recipeId
-// WHERE userId = {{userId}}
-//         and recipe_servings <> 0
-//         and recipe_histories.createdAt > '{{intervalStart}}'
-//         and recipe_histories.createdAt < '{{intervalEnd}}'
-// ------------------------------------------------------------------------
-// removeRecipeFavorite
-// recipeId, userId
-// Delete from recipe_favorites
-// Where userId = {{userId}} AND recipeId = {{recipeId}}
-// --------------------------------------------------------------------

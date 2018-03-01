@@ -1,0 +1,25 @@
+x-name: list-recipe-favorites
+summary: Get all recipe_favorites
+tags:
+  - Recipe Favorites
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: recipeId
+    in: query
+    description: Get Recipe Favorites by recipeId
+    type: number
+  - name: userId
+    in: query
+    description: Get Recipe Favorites by userId
+    type: number
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of Recipe Favorites
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/RecipeFavorite'
+  500:
+    $ref: '#/responses/Unexpected'

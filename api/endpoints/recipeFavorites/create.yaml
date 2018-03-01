@@ -1,0 +1,25 @@
+x-name: create-recipe-favorite
+summary: Create a recipe_favorite
+tags:
+  - Recipe Favorites
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: recipeFavorite
+    in: body
+    description: the Recipe Favorite JSON you want to save
+    schema:
+      $ref: '#/definitions/RecipeFavorite'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new Recipe Favorite
+    schema:
+      $ref: '#/definitions/RecipeFavorite'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

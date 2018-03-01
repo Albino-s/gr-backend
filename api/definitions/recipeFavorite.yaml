@@ -1,0 +1,11 @@
+type: object
+properties:
+  id:
+    type: number
+  recipeId:
+    type: string
+  userId:
+    type: string
+required:
+  - recipeId
+  - userId
