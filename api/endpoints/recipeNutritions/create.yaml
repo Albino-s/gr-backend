@@ -1,0 +1,25 @@
+x-name: create-recipe-nutrition
+summary: Create a recipe_nutrition
+tags:
+  - Recipe Nutritions
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: recipeNutrition
+    in: body
+    description: the Recipe Nutrition JSON you want to save
+    schema:
+      $ref: '#/definitions/RecipeNutrition'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new Recipe Nutrition
+    schema:
+      $ref: '#/definitions/RecipeNutrition'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

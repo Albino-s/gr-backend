@@ -1,0 +1,21 @@
+x-name: list-recipe-nutritions
+summary: Get all recipe_nutritions
+tags:
+  - Recipe Nutritions
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: recipeId
+    in: query
+    description: Get Recipe Nutritions by recipeId
+    type: number
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of Recipe Nutritions
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/RecipeNutrition'
+  500:
+    $ref: '#/responses/Unexpected'

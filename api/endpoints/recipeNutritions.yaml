@@ -1,0 +1,13 @@
+/v1/recipe_nutritions:
+  get:
+    $fs-ref: ./recipeNutritions/list.yaml
+  post:
+    $fs-ref: ./recipeNutritions/create.yaml
+
+/v1/recipe_nutritions/{id}:
+  get:
+    $fs-ref: ./recipeNutritions/view.yaml
+  put:
+    $fs-ref: ./recipeNutritions/update.yaml
+  delete:
+    $fs-ref: ./recipeNutritions/delete.yaml

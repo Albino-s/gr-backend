@@ -1,17 +1,12 @@
-x-name: removeRecipeTags
-summary: removeRecipeTags
+x-name: getListRecipeFavoriteIds
+summary: getListRecipeFavoriteIds
 tags:
   - Queries
 parameters:
   - $fs-ref: ../../globals/auth-params.yaml
-  - name: recipeId
+  - name: userId
     in: query
-    description: recipeId
-    type: string
-    required: true
-  - name: tagIds
-    in: query
-    description: tagIds
+    description: userId
     type: string
     required: true
 responses:

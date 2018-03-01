@@ -1,32 +1,27 @@
-x-name: view-recipe
-summary: Get a recipe with a recipe ID
+x-name: view-tag
+summary: Get a tag with a tag ID
 tags:
-  - Recipes
+  - Tags
 parameters:
   - $fs-ref: ../../globals/auth-params.yaml
   - name: id
     in: path
-    description: ID of the Recipe
+    description: ID of the Tag
     type: string
     required: true
-  - name: deep
-    in: query
-    description: Get related objects
-    type: boolean
-    default: false
 responses:
   403:
     $ref: '#/responses/Forbidden'
   200:
-    description: The recipe with recipe ID
+    description: The Tag
     schema:
-      $ref: '#/definitions/Recipe'
+      $ref: '#/definitions/Tag'
   404:
-    description: Recipe not found
+    description: Tag not found
     schema:
       $ref: '#/definitions/NotFoundError'
   400:
-    description: Invalid Recipe ID supplied
+    description: Invalid Tag ID supplied
     schema:
       $ref: '#/definitions/InvalidParameterError'
   500:

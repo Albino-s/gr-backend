@@ -84,7 +84,8 @@ export const getListProductsFromPantryByUserId = R.curry((httpQuery, query) => {
     throw invalidInputError;
   }
   const rawQueryStr = `
-    SELECT pantries.*, products.*, ingredients.*, product_categories.name as category_name
+    SELECT pantries.*, products.*, ingredients.*, product_categories.name as category_name,
+    pantries.id as id
     from pantries
     JOIN products on products.id = pantries.productId
     JOIN ingredients on ingredients.id = products.ingredientProduct
@@ -174,5 +175,31 @@ export const getListUnits = R.curry((httpQuery, query) => {
   }
   const rawQueryStr = `
     SELECT * from ${objectName}`;
+  return query(builQueryObj(rawQueryStr));
+});
+
+export const getListRecipeFavoriteIds = R.curry((httpQuery, query) => {
+  let {userId} = httpQuery;
+  if (!userId) {
+    throw invalidInputError;
+  }
+  const rawQueryStr = `
+    SELECT recipeId from recipe_favorites
+    where userId = ${userId}`;
+  return query(builQueryObj(rawQueryStr));
+});
+
+export const getListRecipeFavorites = R.curry((httpQuery, query) => {
+  let {userId, pageNumber, pageSize} = httpQuery;
+  if (!userId || !pageNumber || !pageSize) {
+    throw invalidInputError;
+  }
+  const rawQueryStr = `
+    SELECT recipes.*,
+    (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    JOIN recipe_favorites ON recipes.id = recipe_favorites.recipeId
+    where recipe_favorites.userId = ${userId}
+    ORDER BY total_time ASC
+    LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
 });

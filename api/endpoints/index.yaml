@@ -6,6 +6,9 @@ $fs-ref:
   - ./pantryTransactions.yaml
   - ./recipes.yaml
   - ./recipeIngredients.yaml
+  - ./recipeNutritions.yaml
+  - ./recipeTags.yaml
   - ./euStandartUnits.yaml
   - ./usaStandartUnits.yaml
   - ./queries.yaml
+  - ./tags.yaml

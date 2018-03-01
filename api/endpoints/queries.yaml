@@ -107,5 +107,14 @@
   get:
     $fs-ref: ./queries/searchRecipesByTotalTime.yaml
 /v1/queries/removeRecipeTags:
-  delete:
+  get:
     $fs-ref: ./queries/removeRecipeTags.yaml
+/v1/queries/getListRecipeFavoriteIds:
+  get:
+    $fs-ref: ./queries/getListRecipeFavoriteIds.yaml
+/v1/queries/getListRecipeFavorites:
+  get:
+    $fs-ref: ./queries/getListRecipeFavorites.yaml
+/v1/queries/getQuickAndEasyRecipesWithoutFavorite:
+  get:
+    $fs-ref: ./queries/getQuickAndEasyRecipesWithoutFavorite.yaml

@@ -9,6 +9,11 @@ parameters:
     type: number
     description: Filter pantries by userId
     required: false
+  - name: productId
+    in: query
+    type: number
+    description: Filter pantries by productId
+    required: false
   - name: is_deleted
     in: query
     description: Get deleted pantries

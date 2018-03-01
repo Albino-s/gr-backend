@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: number
+  name:
+    type: string
+  type:
+    type: string
+  is_deleted:
+    type: boolean
+    default: false
+required:
+  - name
+  - type

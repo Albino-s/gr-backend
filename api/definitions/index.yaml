@@ -12,7 +12,13 @@ Recipe:
   $fs-ref: ./recipe.yaml
 RecipeIngredient:
   $fs-ref: ./recipeIngredient.yaml
+RecipeNutrition:
+  $fs-ref: ./recipeNutrition.yaml
+RecipeTag:
+  $fs-ref: ./recipeTag.yaml
 PantryTransaction:
   $fs-ref: ./pantryTransaction.yaml
+Tag:
+  $fs-ref: ./tag.yaml
 
 $fs-ref: ./errors.yaml

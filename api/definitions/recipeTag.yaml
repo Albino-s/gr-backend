@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: number
+  recipeId:
+    type: string
+  tagId:
+    type: string
+  is_deleted:
+    type: boolean
+    default: false
+required:
+  - recipeId
+  - tagId

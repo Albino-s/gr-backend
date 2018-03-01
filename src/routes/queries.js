@@ -125,8 +125,20 @@ router
   .get('/searchRecipesByTotalTime', jail(async (req, res) => {
     res.send(await my(Queries.searchRecipesByTotalTime({...req.query})));
   }))
-  .delete('/removeRecipeTags', jail(async (req, res) => {
+  .get('/removeRecipeTags', jail(async (req, res) => {
     res.send(await my(Queries.removeRecipeTags({...req.query})));
+  }))
+  .get('/getListRecipeFavoriteIds', jail(async (req, res) => {
+    console.log("req.query", req.query);
+    res.send(await my(ListQueries.getListRecipeFavoriteIds({...req.query})));
+  }))
+  .get('/getListRecipeFavorites', jail(async (req, res) => {
+    console.log("req.query", req.query);
+    res.send(await my(ListQueries.getListRecipeFavorites({...req.query})));
+  }))
+  .get('/getQuickAndEasyRecipesWithoutFavorite', jail(async (req, res) => {
+    console.log("req.query", req.query);
+    res.send(await my(Queries.getQuickAndEasyRecipesWithoutFavorite({...req.query})));
   }));
 
 export default router;

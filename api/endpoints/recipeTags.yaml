@@ -1,0 +1,13 @@
+/v1/recipe_tags:
+  get:
+    $fs-ref: ./recipeTags/list.yaml
+  post:
+    $fs-ref: ./recipeTags/create.yaml
+
+/v1/recipe_tags/{id}:
+  get:
+    $fs-ref: ./recipeTags/view.yaml
+  put:
+    $fs-ref: ./recipeTags/update.yaml
+  delete:
+    $fs-ref: ./recipeTags/delete.yaml

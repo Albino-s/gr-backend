@@ -1,17 +1,22 @@
-x-name: removeRecipeTags
-summary: removeRecipeTags
+x-name: getQuickAndEasyRecipesWithoutFavorite
+summary: getQuickAndEasyRecipesWithoutFavorite
 tags:
   - Queries
 parameters:
   - $fs-ref: ../../globals/auth-params.yaml
-  - name: recipeId
+  - name: favoriteRecipes
     in: query
-    description: recipeId
+    description: favoriteRecipes
     type: string
     required: true
-  - name: tagIds
+  - name: pageSize
     in: query
-    description: tagIds
+    description: pageSize
+    type: string
+    required: true
+  - name: pageNumber
+    in: query
+    description: pageNumber
     type: string
     required: true
 responses:

@@ -7,6 +7,8 @@ const TRUE = pantries.literal(1);
 
 const byUserId = ({userId}) => userId ? pantries.userId.equals(userId) : TRUE;
 
+const byProductId = ({productId}) => productId ? pantries.productId.equals(productId) : TRUE;
+
 const byId = ({id}) => id ? pantries.id.equals(id) : TRUE;
 
 const byDeleted = ({is_deleted}) => is_deleted === '1' ?
@@ -16,6 +18,7 @@ export const findAll = R.curry((httpQuery, query) => query(
   pantries
     .select()
     .where(byUserId(httpQuery))
+    .where(byProductId(httpQuery))
     .where(byId(httpQuery))
     .where(byDeleted(httpQuery))
     .order(pantries.id)

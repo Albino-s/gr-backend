@@ -9,7 +9,10 @@ import pantries from './pantries';
 import pantryTransactions from './pantryTransactions';
 import recipes from './recipes';
 import recipeIngredients from './recipeIngredients';
+import recipeNutritions from './recipeNutritions';
+import recipeTags from './recipeTags';
 import queries from './queries';
+import tags from './tags';
 
 const api = new Router();
 
@@ -22,6 +25,9 @@ api.use('/v1/pantries', pantries);
 api.use('/v1/pantry_transactions', pantryTransactions);
 api.use('/v1/recipes', recipes);
 api.use('/v1/recipe_ingredients', recipeIngredients);
+api.use('/v1/recipe_nutritions', recipeNutritions);
+api.use('/v1/recipe_tags', recipeTags);
 api.use('/v1/queries', queries);
+api.use('/v1/tags', tags);
 
 export default api;

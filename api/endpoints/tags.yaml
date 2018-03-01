@@ -1,0 +1,13 @@
+/v1/tags:
+  get:
+    $fs-ref: ./tags/list.yaml
+  post:
+    $fs-ref: ./tags/create.yaml
+
+/v1/tags/{id}:
+  get:
+    $fs-ref: ./tags/view.yaml
+  put:
+    $fs-ref: ./tags/update.yaml
+  delete:
+    $fs-ref: ./tags/delete.yaml

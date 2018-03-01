@@ -1,0 +1,21 @@
+x-name: list-recipe-tags
+summary: Get all recipe_tags
+tags:
+  - Recipe Tags
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: recipeId
+    in: query
+    description: Get Recipe Tags by recipeId
+    type: number
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of Recipe Tags
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/RecipeTag'
+  500:
+    $ref: '#/responses/Unexpected'

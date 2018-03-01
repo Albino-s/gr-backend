@@ -1,0 +1,25 @@
+x-name: list-tags
+summary: Get all tags
+tags:
+  - Tags
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - $ref: '#/parameters/search'
+  - name: is_deleted
+    in: query
+    description: Get deleted tags
+    type: number
+    enum:
+      - 0
+      - 1
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of Tags
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Tag'
+  500:
+    $ref: '#/responses/Unexpected'

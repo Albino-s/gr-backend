@@ -1,0 +1,25 @@
+x-name: create-recipe-tag
+summary: Create a recipe_tag
+tags:
+  - Recipe Tags
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: recipeTag
+    in: body
+    description: the Recipe Tag JSON you want to save
+    schema:
+      $ref: '#/definitions/RecipeTag'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new Recipe Tag
+    schema:
+      $ref: '#/definitions/RecipeTag'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

@@ -1,5 +1,6 @@
 import R, {compose as o} from 'ramda';
 import recipeIngredients from '../tables/recipeIngredients';
+import recipeIngredientsRelations from '../tables/recipeIngredientsWithRelations';
 import universal from '../models/universal';
 import {invalidInputError} from '../utils/errors';
 
@@ -9,13 +10,27 @@ const byId = ({id}) => id ? recipeIngredients.id.equals(id) : TRUE;
 
 const byRecipeId = ({recipeId}) => recipeId ? recipeIngredients.recipeId.equals(recipeId) : TRUE;
 
-export const findAll = R.curry((httpQuery, query) => query(
-  recipeIngredients
-    .select()
-    .where(byId(httpQuery))
-    .where(byRecipeId(httpQuery))
-    .order(recipeIngredients.id)
-));
+const withRelations = ({withRelations = '0'}) => withRelations === '1';
+
+export const findAll = R.curry((httpQuery, query) => {
+  let result;
+  if (withRelations(httpQuery)) {
+    result = query(
+      recipeIngredientsRelations
+        .select()
+        .where(byId(httpQuery))
+        .where(byRecipeId(httpQuery))
+        .order(recipeIngredients.id));
+  } else {
+    result = query(
+      recipeIngredients
+        .select()
+        .where(byId(httpQuery))
+        .where(byRecipeId(httpQuery))
+        .order(recipeIngredients.id));
+  }
+  return result;
+});
 
 export const findById = universal.findById(findAll);
 
