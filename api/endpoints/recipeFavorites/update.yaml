@@ -1,33 +1,33 @@
-x-name: update-recipe-tag
-summary: Update a recipe_tag
+x-name: update-recipe-favorite
+summary: Update a recipe_favorite
 tags:
-  - Recipe Tags
+  - Recipe Favorites
 parameters:
   - $fs-ref: ../../globals/auth-params.yaml
   - name: id
     in: path
-    description: ID of the Recipe Tag
+    description: ID of the Recipe Favorite
     type: string
     required: true
-  - name: recipeTag
+  - name: recipeFavorite
     in: body
-    description: new values for the Recipe Tag, id will be ignored
+    description: new values for the Recipe Favorite, id will be ignored
     schema:
-      $ref: '#/definitions/RecipeTag'
+      $ref: '#/definitions/RecipeFavorite'
     required: true
 responses:
   403:
     $ref: '#/responses/Forbidden'
   201:
-    description: An updated Recipe Tag
+    description: An updated Recipe Favorite
     schema:
-      $ref: '#/definitions/RecipeTag'
+      $ref: '#/definitions/RecipeFavorite'
   404:
-    description: Recipe Tag not found
+    description: Recipe Favorite not found
     schema:
       $ref: '#/definitions/NotFoundError'
   400:
-    description: Invalid Recipe Tag ID supplied
+    description: Invalid Recipe Favorite ID supplied
     schema:
       $ref: '#/definitions/InvalidParameterError'
   500:

@@ -18,5 +18,18 @@
   "api": {
       "url": "http://localhost",
       "path": "v1"
+  },
+  "mailer": {
+    "from": "grocer@clockwisesoftware.com",
+    "options": {
+        "host": "smtp.zoho.com",
+        "secureConnection": true,
+        "secure": true,
+        "port": 465,
+      "auth": {
+        "user": "test@clockwisesoftware.com",
+        "pass": "pizdecyapoc1"
+      }
+    }
   }
 }

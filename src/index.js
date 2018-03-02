@@ -38,7 +38,8 @@ const authMiddleware = jwt({
   secret: secretCallback,
   getToken,
   algorithms: ['RS256', 'HS256']
-}).unless({path: ['/v1/auth/login', '/v1/auth/signup', '/docs', '/docs/', '/docs/swagger.yaml']});
+}).unless({path: ['/v1/auth/login', '/v1/auth/signup', '/v1/auth/forgot', '/docs', '/docs/',
+  '/docs/swagger.yaml']});
 
 const app = express();
 
