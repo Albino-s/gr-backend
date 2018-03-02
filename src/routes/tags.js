@@ -1,6 +1,6 @@
 import {Router} from 'express';
-import tagView from '../views/recipeTag';
-import Tags from '../models/recipeTags';
+import tagView from '../views/tag';
+import Tags from '../models/tags';
 import universal from '../routes/universal';
 
 const router = new Router();
