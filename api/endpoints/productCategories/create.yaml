@@ -1,0 +1,25 @@
+x-name: create-product-category
+summary: Create a product_category
+tags:
+  - Product Categories
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: productCategory
+    in: body
+    description: the Product Category JSON you want to save
+    schema:
+      $ref: '#/definitions/ProductCategory'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new Product Category
+    schema:
+      $ref: '#/definitions/ProductCategory'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

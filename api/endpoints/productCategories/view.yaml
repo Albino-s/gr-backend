@@ -1,0 +1,28 @@
+x-name: view-product-category
+summary: Get a product_category with a product ID
+tags:
+  - Product Categories
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: id
+    in: path
+    description: ID of the Product Category
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: The Product Category with Product Category ID
+    schema:
+      $ref: '#/definitions/ProductCategory'
+  404:
+    description: Product Category not found
+    schema:
+      $ref: '#/definitions/NotFoundError'
+  400:
+    description: Invalid Product Category ID supplied
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

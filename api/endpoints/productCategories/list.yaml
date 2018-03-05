@@ -1,0 +1,18 @@
+x-name: list-products-categories
+summary: Get all product_categories
+tags:
+  - Product Categories
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - $ref: '#/parameters/search'
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of Product Categories
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/ProductCategory'
+  500:
+    $ref: '#/responses/Unexpected'

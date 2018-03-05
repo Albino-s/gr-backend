@@ -22,6 +22,8 @@ PantryTransaction:
   $fs-ref: ./pantryTransaction.yaml
 Product:
   $fs-ref: ./product.yaml
+ProductCategory:
+  $fs-ref: ./productCategory.yaml
 Tag:
   $fs-ref: ./tag.yaml
 
