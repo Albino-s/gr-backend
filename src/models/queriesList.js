@@ -146,20 +146,6 @@ export const getListRecipesWithSearchForWebAdmin = R.curry((httpQuery, query) =>
   return query(builQueryObj(rawQueryStr));
 });
 
-// -----Original getListRecipesWithSearchForWebAdmin-----
-// SELECT ingredients.*, product_categories.name as category_name,
-// usa_standart_units.full_name as unit_name,
-// (Select COUNT(1) as totalRows from ingredients
-//     Where (ingredients.name_singular  LIKE '%{{search}}%' OR ingredients.name_plural
-// LIKE '%{{search}}%') ) as totalRows
-// from ingredients
-// Join product_categories on product_categories.id = ingredients.categoryIngredient
-// Join usa_standart_units on usa_standart_units.id = ingredients.unitIngredient
-// Where (ingredients.name_singular  LIKE '%{{search}}%' OR ingredients.name_plural
-// LIKE '%{{search}}%')
-// ORDER BY ingredients.name_singular ASC
-// LIMIT {{pageNumber}}, {{pageSize}}
-
 export const getListTags = R.curry((httpQuery, query) => {
   const rawQueryStr = `
     SELECT *

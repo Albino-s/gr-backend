@@ -39,12 +39,12 @@ export const getRecipesByFilters = R.curry((httpQuery, query) => {
     GROUP BY recipes.id
     HAVING COUNT(recipe_tags.tagId) = ${countTags})
     and  recipe_ingredients.ingredientId IN(${withIngredientIds})
-    GROUP BY recipes.id, recipe_ingredients.id
+    GROUP BY recipes.id
     HAVING COUNT(recipe_ingredients.ingredientId) = ${countWithIngredients}
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
-}); // original --- GROUP BY recipes.id
+}); // original --- GROUP BY recipes.id (not covered recipe_ingredients.id)
 
 export const getRecipesByFiltersExcludeIngredients = R.curry((httpQuery, query) => {
   let {tagIds, countTags, pageNumber, pageSize, search, time, withoutIngredientIds} = httpQuery;
@@ -62,12 +62,12 @@ export const getRecipesByFiltersExcludeIngredients = R.curry((httpQuery, query) 
     and (recipes.prep_time + recipes.cook_time) <= ${time}
     and recipes.id NOT IN(Select recipe_ingredients.recipeId from recipe_ingredients
     WHERE recipe_ingredients.ingredientId IN(${withoutIngredientIds}))
-    GROUP BY recipes.id, recipe_tags.id
+    GROUP BY recipes.id
     HAVING COUNT(recipe_tags.tagId) = ${countTags}
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
-}); // original --- GROUP BY recipes.id
+}); // original --- GROUP BY recipes.id (not covered recipe_tags.id)
 
 export const getRecipesByFiltersIncludeIngredients = R.curry((httpQuery, query) => {
   let {tagIds, countTags, withIngredientIds, countWithIngredients, pageNumber, pageSize, search,
@@ -89,12 +89,12 @@ export const getRecipesByFiltersIncludeIngredients = R.curry((httpQuery, query) 
     and (recipes.prep_time + recipes.cook_time) <= ${time}
     GROUP BY recipes.id HAVING COUNT(recipe_tags.tagId) = ${countTags})
     and  recipe_ingredients.ingredientId IN(${withIngredientIds})
-    GROUP BY recipes.id, recipe_ingredients.id
+    GROUP BY recipes.id
     HAVING COUNT(recipe_ingredients.ingredientId) = ${countWithIngredients}
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
-}); // original --- GROUP BY recipes.id
+}); // original --- GROUP BY recipes.id, (not covered recipe_ingredients.id)
 
 export const getRecipesByIngredients = R.curry((httpQuery, query) => {
   let {withIngredientIds, countWithIngredients, pageNumber, pageSize, search, time,
@@ -114,12 +114,12 @@ export const getRecipesByIngredients = R.curry((httpQuery, query) => {
     and (recipes.prep_time + recipes.cook_time) <= ${time}
     and recipes.id NOT IN(Select recipe_ingredients.recipeId from recipe_ingredients
     WHERE recipe_ingredients.ingredientId IN(${withoutIngredientIds}))
-    GROUP BY recipes.id, recipe_ingredients.id
+    GROUP BY recipes.id
     HAVING COUNT(recipe_ingredients.ingredientId) = ${countWithIngredients}
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
-}); // original --- GROUP BY recipes.id
+}); // original --- GROUP BY recipes.id , (not covered recipe_ingredients.id)
 
 export const getRecipesByTags = R.curry((httpQuery, query) => {
   let {tagIds, countTags, pageNumber, pageSize, search, time} = httpQuery;
@@ -134,12 +134,12 @@ export const getRecipesByTags = R.curry((httpQuery, query) => {
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
     OR recipes.description LIKE '%${search}%')
     and (recipes.prep_time + recipes.cook_time) <= ${time}
-    GROUP BY recipes.id, recipe_tags.id
+    GROUP BY recipes.id
     HAVING COUNT(recipe_tags.tagId) = ${countTags}
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
-}); // original --- GROUP BY recipes.id
+}); // original --- GROUP BY recipes.id, (not covered recipe_tags.id)
 
 export const getRecipesByTime = R.curry((httpQuery, query) => {
   let {time, search, pageNumber, pageSize} = httpQuery;
