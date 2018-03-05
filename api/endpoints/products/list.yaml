@@ -1,0 +1,25 @@
+x-name: list-products
+summary: Get all products
+tags:
+  - Products
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - $ref: '#/parameters/search'
+  - name: is_deleted
+    in: query
+    description: Get deleted products
+    type: number
+    enum:
+      - 0
+      - 1
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: An array of products
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Product'
+  500:
+    $ref: '#/responses/Unexpected'

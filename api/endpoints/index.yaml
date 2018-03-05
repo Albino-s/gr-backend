@@ -4,6 +4,7 @@ $fs-ref:
   - ./ingredients.yaml
   - ./pantries.yaml
   - ./pantryTransactions.yaml
+  - ./products.yaml
   - ./recipes.yaml
   - ./recipeFavorites.yaml
   - ./recipeIngredients.yaml

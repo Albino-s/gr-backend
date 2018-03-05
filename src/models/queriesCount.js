@@ -77,7 +77,7 @@ export const getCountRecipesByFiltersExcludeIngredients = R.curry((httpQuery, qu
 
 export const getCountRecipesByFiltersIncludeIngredients = R.curry((httpQuery, query) => {
   let {tagIds, countTags, search, time, withIngredientIds, countWithIngredients} = httpQuery;
-  if (!tagIds || !countTags || !time || !withIngredientIds || countWithIngredients) {
+  if (!tagIds || !countTags || !time || !withIngredientIds || !countWithIngredients) {
     throw invalidInputError;
   }
   search = search || '';

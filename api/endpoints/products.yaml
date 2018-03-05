@@ -1,0 +1,13 @@
+/v1/products:
+  get:
+    $fs-ref: ./products/list.yaml
+  post:
+    $fs-ref: ./products/create.yaml
+
+/v1/products/{id}:
+  get:
+    $fs-ref: ./products/view.yaml
+  put:
+    $fs-ref: ./products/update.yaml
+  delete:
+    $fs-ref: ./products/delete.yaml
