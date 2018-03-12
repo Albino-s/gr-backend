@@ -1,0 +1,25 @@
+x-name: create-recipe-history
+summary: Create a recipe_history
+tags:
+  - Recipe Histories
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: recipeHistory
+    in: body
+    description: the Recipe History JSON you want to save
+    schema:
+      $ref: '#/definitions/RecipeHistory'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new Recipe History
+    schema:
+      $ref: '#/definitions/RecipeHistory'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

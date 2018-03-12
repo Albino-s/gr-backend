@@ -12,6 +12,8 @@ Recipe:
   $fs-ref: ./recipe.yaml
 RecipeFavorite:
   $fs-ref: ./recipeFavorite.yaml
+RecipeHistory:
+  $fs-ref: ./recipeHistory.yaml
 RecipeIngredient:
   $fs-ref: ./recipeIngredient.yaml
 RecipeNutrition:

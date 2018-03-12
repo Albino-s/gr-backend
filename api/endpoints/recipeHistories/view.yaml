@@ -1,0 +1,28 @@
+x-name: view-recipe-history
+summary: Get a recipe_history with a recipe_history ID
+tags:
+  - Recipe Histories
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: id
+    in: path
+    description: ID of the Recipe History
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  200:
+    description: The Recipe History
+    schema:
+      $ref: '#/definitions/RecipeHistory'
+  404:
+    description: Recipe History not found
+    schema:
+      $ref: '#/definitions/NotFoundError'
+  400:
+    description: Invalid Recipe History ID supplied
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

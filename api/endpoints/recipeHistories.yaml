@@ -1,0 +1,13 @@
+/v1/recipe_histories:
+  get:
+    $fs-ref: ./recipeHistories/list.yaml
+  post:
+    $fs-ref: ./recipeHistories/create.yaml
+
+/v1/recipe_histories/{id}:
+  get:
+    $fs-ref: ./recipeHistories/view.yaml
+  put:
+    $fs-ref: ./recipeHistories/update.yaml
+  delete:
+    $fs-ref: ./recipeHistories/delete.yaml
