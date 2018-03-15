@@ -39,7 +39,7 @@ const authMiddleware = jwt({
   getToken,
   algorithms: ['RS256', 'HS256']
 }).unless({path: ['/v1/auth/login', '/v1/auth/signup', '/v1/auth/forgot', '/docs', '/docs/',
-  '/docs/swagger.yaml']});
+  '/docs/swagger.yaml', '/v1/auth/reset-password', '/v1/auth/new-password']});
 
 const app = express();
 

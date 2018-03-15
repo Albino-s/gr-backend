@@ -10,6 +10,8 @@ const TRUE = users.literal(1);
 const bySearch = ({search}) => search ?
   users.email.like(l(search)) : TRUE;
 
+const byResetToken = ({resetToken}) => resetToken ? users.resetToken.equals(resetToken) : TRUE;
+
 const byId = ({id}) => id ? users.id.equals(id) : TRUE;
 
 const byEmail = ({email}) => email ?
@@ -21,6 +23,7 @@ export const findAll = R.curry((httpQuery, query) => query(
     .where(bySearch(httpQuery))
     .where(byId(httpQuery))
     .where(byEmail(httpQuery))
+    .where(byResetToken(httpQuery))
     .order(users.id)
 ));
 
