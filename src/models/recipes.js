@@ -30,14 +30,16 @@ const singular = universal.singular(recipes, findById);
 export const create = R.curry(async (recipe, sess, query) => {
   const {name} = recipe;
   if (name) {
-    const prepare = o(R.omit(['id']));
+    const prepare = o(R.omit(['id', 'tags', 'nutritions', 'recipeIngredients',
+     'newRecipeIngredients']));
     return await singular.create(prepare(recipe), sess, query);
   }
   throw invalidInputError;
 });
 
 export const update = R.curry(async (id, recipe, sess, query) => {
-  const prepare = o(R.omit(['id', 'is_deleted']));
+  const prepare = o(R.omit(['id', 'tags', 'nutritions', 'recipeIngredients',
+     'newRecipeIngredients', 'is_deleted']));
 
   return await singular.update(id, prepare(recipe), sess, query);
 });

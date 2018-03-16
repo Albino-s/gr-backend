@@ -23,7 +23,8 @@ router.post('/login', bodyType('Object'), universal.route(200, async req => {
       throw invalidCredentialsError;
     }
     const user = R.head(await Users.findAll({email}, query));
-    if (!user || R.isEmpty(user) || !bcrypt.compareSync(password, user.password)) {
+    if (!user || R.isEmpty(user) || !user.password ||
+     !bcrypt.compareSync(password, user.password)) {
       throw invalidCredentialsError;
     }
     return {...userView(user), access_token: generateToken({email: user.email})};

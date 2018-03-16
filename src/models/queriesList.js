@@ -140,7 +140,7 @@ export const getListRecipesWithSearchForWebAdmin = R.curry((httpQuery, query) =>
     LEFT JOIN tags on recipe_tags.tagId = tags.id
     Where (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
      OR recipes.description LIKE '%${search}%')
-    GROUP BY recipes.id, tags.name, tags.type
+    GROUP BY recipes.id
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
