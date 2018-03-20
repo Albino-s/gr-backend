@@ -11,7 +11,7 @@ export const getRecipeIngredientsByIngredientIds = R.curry((httpQuery, query) =>
     SELECT recipe_ingredients.recipeId, recipes.ingredient_count,
     count(recipe_ingredients.recipeId) as countIngredientPantry from recipe_ingredients
     JOIN recipes on recipes.id = recipe_ingredients.recipeId
-    WHERE recipe_ingredients.ingredientId IN (${ingredientIds})
+    WHERE recipe_ingredients.ingredientId IN (${ingredientIds}) AND recipes.is_deleted != 1
     Group By recipeId`;
   return query(builQueryObj(rawQueryStr));
 });
@@ -26,9 +26,9 @@ export const getRecipesByFilters = R.curry((httpQuery, query) => {
   search = search || '';
   const rawQueryStr = `
     SELECT *,
-    (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    (recipes.prep_time + recipes.cook_time) as total_time, recipes.id as id from recipes
     JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipeId
-    Where recipes.id IN(SELECT recipes.id from recipes
+    Where recipes.is_deleted != 1 and recipes.id IN(SELECT recipes.id from recipes
     JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
     Where recipe_tags.tagId IN(${tagIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%' OR
@@ -54,9 +54,9 @@ export const getRecipesByFiltersExcludeIngredients = R.curry((httpQuery, query) 
   search = search || '';
   const rawQueryStr = `
     SELECT *,
-    (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    (recipes.prep_time + recipes.cook_time) as total_time, recipes.id as id from recipes
     JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
-    Where recipe_tags.tagId IN(${tagIds})
+    Where recipes.is_deleted != 1 and recipe_tags.tagId IN(${tagIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
     OR recipes.description LIKE '%${search}%')
     and (recipes.prep_time + recipes.cook_time) <= ${time}
@@ -79,9 +79,9 @@ export const getRecipesByFiltersIncludeIngredients = R.curry((httpQuery, query) 
   search = search || '';
   const rawQueryStr = `
     SELECT *,
-    (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    (recipes.prep_time + recipes.cook_time) as total_time, recipes.id as id from recipes
     JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipeId
-    Where recipes.id IN(SELECT recipes.id from recipes
+    Where recipes.is_deleted != 1 and recipes.id IN(SELECT recipes.id from recipes
     JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
     Where recipe_tags.tagId IN(${tagIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
@@ -106,9 +106,9 @@ export const getRecipesByIngredients = R.curry((httpQuery, query) => {
   search = search || '';
   const rawQueryStr = `
     SELECT *,
-    (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    (recipes.prep_time + recipes.cook_time) as total_time, recipes.id as id from recipes
     JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipeId
-    WHERE recipe_ingredients.ingredientId IN(${withIngredientIds})
+    WHERE recipes.is_deleted != 1 and recipe_ingredients.ingredientId IN(${withIngredientIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
      OR recipes.description LIKE '%${search}%')
     and (recipes.prep_time + recipes.cook_time) <= ${time}
@@ -128,9 +128,10 @@ export const getRecipesByTags = R.curry((httpQuery, query) => {
   }
   search = search || '';
   const rawQueryStr = `
-    SELECT *, (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    SELECT *, (recipes.prep_time + recipes.cook_time) as total_time,
+    recipes.id as id from recipes
     JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
-    Where recipe_tags.tagId IN(${tagIds})
+    Where recipes.is_deleted != 1 and recipe_tags.tagId IN(${tagIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
     OR recipes.description LIKE '%${search}%')
     and (recipes.prep_time + recipes.cook_time) <= ${time}
@@ -148,8 +149,9 @@ export const getRecipesByTime = R.curry((httpQuery, query) => {
   }
   search = search || '';
   const rawQueryStr = `
-    SELECT *, (recipes.prep_time + recipes.cook_time) as total_time from recipes
-    WHERE (recipes.prep_time + recipes.cook_time) <= ${time}
+    SELECT *, (recipes.prep_time + recipes.cook_time) as total_time,
+    recipes.id as id from recipes
+    WHERE recipes.is_deleted != 1 and (recipes.prep_time + recipes.cook_time) <= ${time}
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
     OR recipes.description LIKE '%${search}%')
     ORDER BY total_time ASC
@@ -164,9 +166,10 @@ export const getRecipesByWithIngredients = R.curry((httpQuery, query) => {
   }
   search = search || '';
   const rawQueryStr = `
-    SELECT *, (recipes.prep_time + recipes.cook_time) as total_time from recipes
+    SELECT *, (recipes.prep_time + recipes.cook_time) as total_time,
+    recipes.id as id from recipes
     JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipeId
-    WHERE recipe_ingredients.ingredientId IN(${withIngredientIds})
+    WHERE recipes.is_deleted != 1 and recipe_ingredients.ingredientId IN(${withIngredientIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
     OR recipes.description LIKE '%${search}%')
     and (recipes.prep_time + recipes.cook_time) <= ${time}
@@ -184,8 +187,9 @@ export const getRecipesByWithoutIngredients = R.curry((httpQuery, query) => {
   }
   search = search || '';
   const rawQueryStr = `
-    SELECT *, (recipes.prep_time + recipes.cook_time) as total_time from recipes
-    WHERE recipes.id NOT IN(Select recipe_ingredients.recipeId from recipe_ingredients
+    SELECT *, (recipes.prep_time + recipes.cook_time) as total_time, recipes.id as id from recipes
+    WHERE recipes.is_deleted != 1
+    and recipes.id NOT IN(Select recipe_ingredients.recipeId from recipe_ingredients
     WHERE recipe_ingredients.ingredientId IN(${withoutIngredientIds}))
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
     OR recipes.description LIKE '%${search}%')

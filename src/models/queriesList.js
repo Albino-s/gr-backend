@@ -103,7 +103,7 @@ export const getListRecipesByIds = R.curry((httpQuery, query) => {
     SELECT *,
     (select count(id) from recipes) as total_count,
     (prep_time + cook_time) as total_time from recipes
-    WHERE id IN(${recipeIds})
+    WHERE is_deleted != 1 and id IN(${recipeIds})
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
@@ -117,7 +117,8 @@ export const getListRecipesByIngredientIds = R.curry((httpQuery, query) => {
   const rawQueryStr = `
     SELECT *, (prep_time + cook_time) as total_time from recipes
     JOIN recipe_ingredients on recipe_ingredients.recipeId = recipes.id
-    WHERE recipes.id IN(${recipeIds}) and recipe_ingredients.ingredientId IN(${ingredientIds})
+    WHERE recipes.is_deleted != 1 and recipes.id IN(${recipeIds})
+     and recipe_ingredients.ingredientId IN(${ingredientIds})
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
@@ -138,7 +139,8 @@ export const getListRecipesWithSearchForWebAdmin = R.curry((httpQuery, query) =>
     from recipes
     LEFT JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
     LEFT JOIN tags on recipe_tags.tagId = tags.id
-    Where (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
+    Where recipes.is_deleted != 1 and
+     (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
      OR recipes.description LIKE '%${search}%') and recipes.is_deleted != 1
     GROUP BY recipes.id
     ORDER BY total_time ASC
@@ -184,7 +186,7 @@ export const getListRecipeFavorites = R.curry((httpQuery, query) => {
     SELECT recipes.*,
     (recipes.prep_time + recipes.cook_time) as total_time from recipes
     JOIN recipe_favorites ON recipes.id = recipe_favorites.recipeId
-    where recipe_favorites.userId = ${userId}
+    where recipes.is_deleted != 1 and recipe_favorites.userId = ${userId}
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));

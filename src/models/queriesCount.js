@@ -29,7 +29,7 @@ export const getCountRecipesByFilters = R.curry((httpQuery, query) => {
       (SELECT
       (recipes.prep_time + recipes.cook_time) as total_time from recipes
       JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipeId
-      Where recipes.id IN(SELECT recipes.id from recipes
+      Where recipes.is_deleted != 1 and recipes.id IN(SELECT recipes.id from recipes
       JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
       Where recipe_tags.tagId IN(${tagIds})
       and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
@@ -61,7 +61,7 @@ export const getCountRecipesByFiltersExcludeIngredients = R.curry((httpQuery, qu
     (recipes.prep_time + recipes.cook_time) as total_time from recipes
 
     JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
-    Where recipe_tags.tagId IN(${tagIds})
+    Where recipes.is_deleted != 1 and recipe_tags.tagId IN(${tagIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
       OR recipes.description LIKE '%${search}%')
     and (recipes.prep_time + recipes.cook_time) <= ${time}
@@ -87,7 +87,7 @@ export const getCountRecipesByFiltersIncludeIngredients = R.curry((httpQuery, qu
     (recipes.prep_time + recipes.cook_time) as total_time from recipes
 
     JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipeId
-    Where recipes.id IN(SELECT recipes.id from recipes
+    Where recipes.is_deleted != 1 and recipes.id IN(SELECT recipes.id from recipes
     JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
     Where recipe_tags.tagId IN(${tagIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
@@ -112,7 +112,8 @@ export const getCountRecipesByIngredientId = R.curry((httpQuery, query) => {
   const rawQueryStr = `
     SELECT count(recipes.id) as total_count from recipes
     JOIN recipe_ingredients on recipe_ingredients.recipeId = recipes.id
-    WHERE recipes.id IN(${recipeIds}) and recipe_ingredients.ingredientId = ${ingredientId}`;
+    WHERE recipes.is_deleted != 1
+     and recipes.id IN(${recipeIds}) and recipe_ingredients.ingredientId = ${ingredientId}`;
   return query(builQueryObj(rawQueryStr));
 });
 
@@ -127,7 +128,7 @@ export const getCountRecipesByIngredients = R.curry((httpQuery, query) => {
     (SELECT
     (recipes.prep_time + recipes.cook_time) as total_time from recipes
     JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipeId
-    WHERE recipe_ingredients.ingredientId IN(${withIngredientIds})
+    WHERE recipes.is_deleted != 1 and recipe_ingredients.ingredientId IN(${withIngredientIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
       OR recipes.description LIKE '%${search}%')
     and (recipes.prep_time + recipes.cook_time) <= ${time}
@@ -149,7 +150,7 @@ export const getCountRecipesByTags = R.curry((httpQuery, query) => {
     (SELECT
     (recipes.prep_time + recipes.cook_time) as total_time from recipes
     JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
-    Where recipe_tags.tagId IN(${tagIds})
+    Where recipes.is_deleted != 1 and recipe_tags.tagId IN(${tagIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
       OR recipes.description LIKE '%${search}%')
     and (recipes.prep_time + recipes.cook_time) <= ${time}
@@ -168,7 +169,7 @@ export const getCountRecipesByTime = R.curry((httpQuery, query) => {
     Select count(1) as totalRecipes from
     (SELECT
     (recipes.prep_time + recipes.cook_time) as total_time from recipes
-    WHERE (recipes.prep_time + recipes.cook_time) <= ${time}
+    WHERE recipes.is_deleted != 1 and (recipes.prep_time + recipes.cook_time) <= ${time}
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
       OR recipes.description LIKE '%${search}%')) as t1`;
   return query(builQueryObj(rawQueryStr));
@@ -185,7 +186,7 @@ export const getCountRecipesByWithIngredients = R.curry((httpQuery, query) => {
     SELECT
     (recipes.prep_time + recipes.cook_time) as total_time from recipes
     JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipeId
-    WHERE recipe_ingredients.ingredientId IN(${withIngredientIds})
+    WHERE recipes.is_deleted != 1 and recipe_ingredients.ingredientId IN(${withIngredientIds})
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
      OR recipes.description LIKE '%${search}%')
     and (recipes.prep_time + recipes.cook_time) <= ${time}
@@ -203,7 +204,7 @@ export const getCountRecipesByWithoutIngredients = R.curry((httpQuery, query) =>
   const rawQueryStr = `
     Select count(1) as totalRecipes from
     (SELECT *, (recipes.prep_time + recipes.cook_time) as total_time from recipes
-    WHERE recipes.id NOT IN(
+    WHERE recipes.is_deleted != 1 and recipes.id NOT IN(
     Select recipe_ingredients.recipeId from recipe_ingredients
     WHERE recipe_ingredients.ingredientId IN(${withoutIngredientIds}))
     and (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'

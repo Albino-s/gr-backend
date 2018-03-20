@@ -69,6 +69,7 @@ export const getQuickAndEasyRecipes = R.curry((httpQuery, query) => {
     SELECT *,
     (select count(id) from recipes) as total_count,
     (prep_time + cook_time) as total_time from recipes
+    WHERE is_deleted != 1
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
@@ -125,7 +126,7 @@ export const getQuickAndEasyRecipesWithoutFavorite = R.curry((httpQuery, query) 
     SELECT *,
     (select count(id) from recipes Where id NOT IN (${favoriteRecipes}) ) as total_count,
     (prep_time + cook_time) as total_time from recipes
-    Where id NOT IN (${favoriteRecipes})
+    Where id NOT IN (${favoriteRecipes}) and is_deleted != 1
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
