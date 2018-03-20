@@ -124,3 +124,12 @@
 /v1/queries/removeRecipeFavorite:
   get:
     $fs-ref: ./queries/removeRecipeFavorite.yaml
+/v1/queries/getListIngredientsWithSearchForWebAdmin:
+  get:
+    $fs-ref: ./queries/getListIngredientsWithSearchForWebAdmin.yaml
+/v1/queries/getListProducts:
+  get:
+    $fs-ref: ./queries/getListProducts.yaml
+/v1/queries/getListProductsWithSearchForWebAdmin:
+  get:
+    $fs-ref: ./queries/getListProductsWithSearchForWebAdmin.yaml

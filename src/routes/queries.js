@@ -142,6 +142,15 @@ router
   }))
   .get('/removeRecipeFavorite', jail(async (req, res) => {
     res.send(await my(Queries.removeRecipeFavorite({...req.query})));
+  }))
+  .get('/getListIngredientsWithSearchForWebAdmin', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListIngredientsWithSearchForWebAdmin({...req.query})));
+  }))
+  .get('/getListProducts', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListProducts({...req.query})));
+  }))
+  .get('/getListProductsWithSearchForWebAdmin', jail(async (req, res) => {
+    res.send(await my(ListQueries.getListProductsWithSearchForWebAdmin({...req.query})));
   }));
 
 export default router;

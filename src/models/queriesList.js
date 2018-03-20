@@ -134,12 +134,12 @@ export const getListRecipesWithSearchForWebAdmin = R.curry((httpQuery, query) =>
     (recipes.prep_time + recipes.cook_time) as total_time,
     (Select COUNT(1) as totalRows from recipes
         Where (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
-        OR recipes.description LIKE '%${search}%') ) as totalRows
+        OR recipes.description LIKE '%${search}%') and recipes.is_deleted != 1 ) as totalRows
     from recipes
     LEFT JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
     LEFT JOIN tags on recipe_tags.tagId = tags.id
     Where (recipes.name  LIKE '%${search}%' OR recipes.instructions LIKE '%${search}%'
-     OR recipes.description LIKE '%${search}%')
+     OR recipes.description LIKE '%${search}%') and recipes.is_deleted != 1
     GROUP BY recipes.id
     ORDER BY total_time ASC
     LIMIT ${pageNumber}, ${pageSize}`;
@@ -186,6 +186,55 @@ export const getListRecipeFavorites = R.curry((httpQuery, query) => {
     JOIN recipe_favorites ON recipes.id = recipe_favorites.recipeId
     where recipe_favorites.userId = ${userId}
     ORDER BY total_time ASC
+    LIMIT ${pageNumber}, ${pageSize}`;
+  return query(builQueryObj(rawQueryStr));
+});
+
+export const getListIngredientsWithSearchForWebAdmin = R.curry((httpQuery, query) => {
+  let {search, pageNumber, pageSize} = httpQuery;
+  if (!pageNumber || !pageSize) {
+    throw invalidInputError;
+  }
+  search = search || '';
+  const rawQueryStr = `
+    SELECT ingredients.*, product_categories.name as category_name,
+     usa_standart_units.full_name as unit_name,
+    (Select COUNT(1) as totalRows from ingredients
+        Where (ingredients.name_singular  LIKE '%${search}%' OR ingredients.name_plural
+    LIKE '%${search}%') ) as totalRows from ingredients
+    Join product_categories on product_categories.id = ingredients.categoryIngredient
+    Join usa_standart_units on usa_standart_units.id = ingredients.unitIngredient
+    Where (ingredients.name_singular  LIKE '%${search}%' OR ingredients.name_plural
+    LIKE '%${search}%')
+    ORDER BY ingredients.name_singular ASC
+    LIMIT ${pageNumber}, ${pageSize}`;
+  return query(builQueryObj(rawQueryStr));
+});
+
+export const getListProducts = R.curry((httpQuery, query) => {
+  let {search} = httpQuery;
+  search = search || '';
+  const rawQueryStr = `
+    from products
+    WHERE name LIKE '%${search}%'
+    ORDER BY name ASC`;
+  return query(builQueryObj(rawQueryStr));
+});
+
+export const getListProductsWithSearchForWebAdmin = R.curry((httpQuery, query) => {
+  let {search, pageNumber, pageSize} = httpQuery;
+  if (!pageNumber || !pageSize) {
+    throw invalidInputError;
+  }
+  search = search || '';
+  const rawQueryStr = `
+    SELECT products.*, usa_standart_units.full_name as unit_name,
+    (Select COUNT(1) as totalRows from products
+        Where (products.name  LIKE '%${search}%')) as totalRows
+    from products
+    Join usa_standart_units on usa_standart_units.id = products.unitProduct
+    Where (products.name  LIKE '%${search}%')
+    ORDER BY products.name ASC
     LIMIT ${pageNumber}, ${pageSize}`;
   return query(builQueryObj(rawQueryStr));
 });
