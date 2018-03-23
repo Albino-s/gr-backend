@@ -9,6 +9,8 @@ const TRUE = recipeIngredients.literal(1);
 const byId = ({id}) => id ? recipeIngredients.id.equals(id) : TRUE;
 
 const byRecipeId = ({recipeId}) => recipeId ? recipeIngredients.recipeId.equals(recipeId) : TRUE;
+const byIngredientId = ({ingredientId}) => ingredientId ?
+ recipeIngredients.ingredientId.equals(ingredientId) : TRUE;
 
 const withRelations = ({withRelations = '0'}) => withRelations === '1';
 
@@ -27,6 +29,7 @@ export const findAll = R.curry((httpQuery, query) => {
         .select()
         .where(byId(httpQuery))
         .where(byRecipeId(httpQuery))
+        .where(byIngredientId(httpQuery))
         .order(recipeIngredients.id));
   }
   return result;

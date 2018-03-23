@@ -54,8 +54,15 @@ export const create = R.curry(async (user, sess, query) => {
 });
 
 export const update = R.curry(async (id, userSeed, sess, query) => {
-  const prepare = o(R.omit(['id', 'email', 'modified']));
+  const prepare = o(R.omit(['id', 'email', 'modified', 'oldPassword']));
   if (userSeed.password) {
+    if (userSeed.oldPassword) {
+      const user = await findById(id, query);
+      if (!user || R.isEmpty(user) || !user.password ||
+       !bcrypt.compareSync(userSeed.oldPassword, user.password)) {
+        throw invalidInput("Wrong Current Password.");
+      }
+    }
     if (userSeed.password.trim() && userSeed.password.trim().length > 5) {
       userSeed.password = bcrypt.hashSync(userSeed.password.trim(), 10);
     } else {
