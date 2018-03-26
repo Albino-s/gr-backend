@@ -1,5 +1,7 @@
 $fs-ref:
   - ./auth.yaml
+  - ./customNutritions.yaml
+  - ./dietitianCustomers.yaml
   - ./users.yaml
   - ./ingredients.yaml
   - ./pantries.yaml

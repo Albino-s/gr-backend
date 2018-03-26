@@ -1,0 +1,25 @@
+x-name: create-custom-nutrition
+summary: Create a custom_nutrition
+tags:
+  - Custom Nutritions
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: customNutrition
+    in: body
+    description: the Custom Nutrition JSON you want to save
+    schema:
+      $ref: '#/definitions/CustomNutrition'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new Custom Nutrition
+    schema:
+      $ref: '#/definitions/CustomNutrition'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

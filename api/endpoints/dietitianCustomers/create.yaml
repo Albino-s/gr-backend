@@ -1,0 +1,25 @@
+x-name: create-dietitian-customer
+summary: Create a dietitian_customer
+tags:
+  - Customers of Dietitian
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: dietitianCustomer
+    in: body
+    description: the Customers of Dietitian JSON you want to save
+    schema:
+      $ref: '#/definitions/DietitianCustomer'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: A new Customers of Dietitian
+    schema:
+      $ref: '#/definitions/DietitianCustomer'
+  400:
+    description: Invalid input
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

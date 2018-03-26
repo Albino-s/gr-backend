@@ -1,0 +1,40 @@
+type: object
+properties:
+  id:
+    type: number
+  customerId:
+    type: number
+  calories:
+    type: number
+  calories_from_fat:
+    type: number
+  total_fat:
+    type: number
+  saturated_fat:
+    type: number
+  trans_fat:
+    type: number
+  cholesterol:
+    type: number
+  sodium:
+    type: number
+  potassium:
+    type: number
+  total_carbohydrates:
+    type: number
+  dietary_fiber:
+    type: number
+  sugar:
+    type: number
+  protein:
+    type: number
+  vitamin_a:
+    type: number
+  vitamin_c:
+    type: number
+  calcium:
+    type: number
+  iron:
+    type: number
+required:
+  - customerId

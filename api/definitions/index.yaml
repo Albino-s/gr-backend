@@ -28,5 +28,9 @@ ProductCategory:
   $fs-ref: ./productCategory.yaml
 Tag:
   $fs-ref: ./tag.yaml
+DietitianCustomer:
+  $fs-ref: ./dietitianCustomer.yaml
+CustomNutrition:
+  $fs-ref: ./customNutrition.yaml
 
 $fs-ref: ./errors.yaml

@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: number
+  userId:
+    type: number
+  dietitianId:
+    type: number
+  is_confirmed:
+    type: boolean
+    default: false
+required:
+  - userId
+  - dietitianId

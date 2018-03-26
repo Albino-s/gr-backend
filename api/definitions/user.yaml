@@ -17,6 +17,9 @@ properties:
   is_admin:
     type: boolean
     default: false
+  is_dietitian:
+    type: boolean
+    default: false
   servings:
     type: number
     default: 4

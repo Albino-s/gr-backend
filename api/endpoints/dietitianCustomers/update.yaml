@@ -1,0 +1,34 @@
+x-name: update-dietitian-customer
+summary: Update a dietitian_customer
+tags:
+  - Customers of Dietitian
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: id
+    in: path
+    description: ID of the Customer of Dietitian
+    type: string
+    required: true
+  - name: dietitianCustomer
+    in: body
+    description: new values for the Customer of Dietitian, id will be ignored
+    schema:
+      $ref: '#/definitions/DietitianCustomer'
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  201:
+    description: An updated Customer of Dietitian
+    schema:
+      $ref: '#/definitions/DietitianCustomer'
+  404:
+    description: Customer of Dietitian not found
+    schema:
+      $ref: '#/definitions/NotFoundError'
+  400:
+    description: Invalid Customer of Dietitian ID supplied
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

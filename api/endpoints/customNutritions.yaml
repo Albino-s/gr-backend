@@ -1,0 +1,13 @@
+/v1/custom_nutritions:
+  get:
+    $fs-ref: ./customNutritions/list.yaml
+  post:
+    $fs-ref: ./customNutritions/create.yaml
+
+/v1/custom_nutritions/{id}:
+  get:
+    $fs-ref: ./customNutritions/view.yaml
+  put:
+    $fs-ref: ./customNutritions/update.yaml
+  delete:
+    $fs-ref: ./customNutritions/delete.yaml

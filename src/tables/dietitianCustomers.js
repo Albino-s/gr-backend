@@ -2,17 +2,11 @@ import sql from 'sql';
 import * as functions from '../utils/functions';
 
 const objectFields = [
-  'email',
-  'firstName',
-  'lastName',
-  'avatar',
+  'dietitianId',
+  'userId',
+  'is_confirmed',
   'createdAt',
-  'updatedAt',
-  'is_admin',
-  'is_dietitian',
-  'servings',
-  'password',
-  'resetToken'
+  'updatedAt'
 ];
 
 const columns = [
@@ -21,7 +15,7 @@ const columns = [
 ];
 
 export default sql.define({
-  name: 'users',
+  name: 'dietitian_customers',
   columns
 });
 

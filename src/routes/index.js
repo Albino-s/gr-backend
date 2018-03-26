@@ -18,6 +18,8 @@ import recipeNutritions from './recipeNutritions';
 import recipeTags from './recipeTags';
 import queries from './queries';
 import tags from './tags';
+import dietitianCustomers from './dietitianCustomers';
+import customNutritions from './customNutritions';
 
 const api = new Router();
 
@@ -39,5 +41,7 @@ api.use('/v1/recipe_nutritions', recipeNutritions);
 api.use('/v1/recipe_tags', recipeTags);
 api.use('/v1/queries', queries);
 api.use('/v1/tags', tags);
+api.use('/v1/dietitian_customers', dietitianCustomers);
+api.use('/v1/custom_nutritions', customNutritions);
 
 export default api;

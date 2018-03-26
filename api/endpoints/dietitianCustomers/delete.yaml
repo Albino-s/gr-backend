@@ -1,0 +1,26 @@
+x-name: delete-dietitian-customer
+summary: Delete a dietitian_customer
+tags:
+  - Customers of Dietitian
+parameters:
+  - $fs-ref: ../../globals/auth-params.yaml
+  - name: id
+    in: path
+    description: ID of the dietitianCustomer
+    type: string
+    required: true
+responses:
+  403:
+    $ref: '#/responses/Forbidden'
+  204:
+    description: Customer of Dietitian was deleted
+  404:
+    description: Customer of Dietitian not found
+    schema:
+      $ref: '#/definitions/NotFoundError'
+  400:
+    description: Invalid Customer of Dietitian ID supplied
+    schema:
+      $ref: '#/definitions/InvalidParameterError'
+  500:
+    $ref: '#/responses/Unexpected'

@@ -1,0 +1,13 @@
+/v1/dietitian_customers:
+  get:
+    $fs-ref: ./dietitianCustomers/list.yaml
+  post:
+    $fs-ref: ./dietitianCustomers/create.yaml
+
+/v1/dietitian_customers/{id}:
+  get:
+    $fs-ref: ./dietitianCustomers/view.yaml
+  put:
+    $fs-ref: ./dietitianCustomers/update.yaml
+  delete:
+    $fs-ref: ./dietitianCustomers/delete.yaml
