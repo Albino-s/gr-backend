@@ -1,5 +1,7 @@
 import R, {compose as o} from 'ramda';
 import dietitianCustomers from '../tables/dietitianCustomers';
+import dietitianCustomersRelations from '../tables/dietitianCustomersWithRelations';
+import customNutritions from '../tables/customNutritions';
 import universal from '../models/universal';
 import {invalidInputError} from '../utils/errors';
 
@@ -12,14 +14,33 @@ const byUserId = ({userId}) => userId ? dietitianCustomers.userId.equals(userId)
 const byDietitianId = ({dietitianId}) => dietitianId ?
   dietitianCustomers.dietitianId.equals(dietitianId) : TRUE;
 
-export const findAll = R.curry((httpQuery, query) => query(
-  dietitianCustomers
-    .select()
-    .where(byId(httpQuery))
-    .where(byUserId(httpQuery))
-    .where(byDietitianId(httpQuery))
-    .order(dietitianCustomers.id)
-));
+const withCustomNutritions = ({withCustomNutritions}) => withCustomNutritions ?
+  customNutritions.customerId.equals(dietitianCustomers.id) : TRUE;
+
+const withRelations = ({withRelations = '0'}) => withRelations === '1';
+
+export const findAll = R.curry((httpQuery, query) => {
+  let result;
+  if (withRelations(httpQuery)) {
+    result = query(
+      dietitianCustomersRelations
+        .select()
+        .where(byId(httpQuery))
+        .where(byUserId(httpQuery))
+        .where(byDietitianId(httpQuery))
+        .where(withCustomNutritions(httpQuery))
+        .order(dietitianCustomers.id));
+  } else {
+    result = query(
+      dietitianCustomers
+        .select()
+        .where(byId(httpQuery))
+        .where(byUserId(httpQuery))
+        .where(byDietitianId(httpQuery))
+        .order(dietitianCustomers.id));
+  }
+  return result;
+});
 
 export const findById = universal.findById(findAll);
 
