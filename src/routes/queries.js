@@ -140,6 +140,9 @@ router
   .get('/getNutrition', jail(async (req, res) => {
     res.send(await my(Queries.getNutrition({...req.query})));
   }))
+  .get('/getUserRecipesHistory', jail(async (req, res) => {
+    res.send(await my(Queries.getUserRecipesHistory({...req.query})));
+  }))
   .get('/removeRecipeFavorite', jail(async (req, res) => {
     res.send(await my(Queries.removeRecipeFavorite({...req.query})));
   }))

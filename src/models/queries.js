@@ -163,6 +163,23 @@ export const getNutrition = R.curry((httpQuery, query) => {
   return query(builQueryObj(rawQueryStr));
 });
 
+export const getUserRecipesHistory = R.curry((httpQuery, query) => {
+  let {userId, intervalStart, intervalEnd} = httpQuery;
+  if (!userId || !intervalStart || !intervalEnd) {
+    throw invalidInputError;
+  }
+  const rawQueryStr = `
+    SELECT *,
+    DATE_FORMAT(recipe_histories.createdAt, '%Y-%m-%d') as date,
+    TIME(recipe_histories.createdAt) as time
+    from recipe_histories JOIN recipes on recipes.id = recipe_histories.recipeId
+      WHERE userId = ${userId}
+             and recipe_servings <> 0
+             and recipe_histories.createdAt > '${intervalStart}'
+             and recipe_histories.createdAt < '${intervalEnd}'`;
+  return query(builQueryObj(rawQueryStr));
+});
+
 export const removeRecipeFavorite = R.curry((httpQuery, query) => {
   let {recipeId, userId} = httpQuery;
   if (!userId || !recipeId) {

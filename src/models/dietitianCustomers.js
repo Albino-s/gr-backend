@@ -1,5 +1,6 @@
 import R, {compose as o} from 'ramda';
 import dietitianCustomers from '../tables/dietitianCustomers';
+import dietitianCustomersData from '../tables/dietitianCustomersData';
 import dietitianCustomersRelations from '../tables/dietitianCustomersWithRelations';
 import customNutritions from '../tables/customNutritions';
 import universal from '../models/universal';
@@ -18,6 +19,7 @@ const withCustomNutritions = ({withCustomNutritions}) => withCustomNutritions ?
   customNutritions.customerId.equals(dietitianCustomers.id) : TRUE;
 
 const withRelations = ({withRelations = '0'}) => withRelations === '1';
+const withCustomerData = ({withCustomerData = '0'}) => withCustomerData === '1';
 
 export const findAll = R.curry((httpQuery, query) => {
   let result;
@@ -29,6 +31,14 @@ export const findAll = R.curry((httpQuery, query) => {
         .where(byUserId(httpQuery))
         .where(byDietitianId(httpQuery))
         .where(withCustomNutritions(httpQuery))
+        .order(dietitianCustomers.id));
+  } else if (withCustomerData(httpQuery)) {
+    result = query(
+      dietitianCustomersData
+        .select()
+        .where(byId(httpQuery))
+        .where(byUserId(httpQuery))
+        .where(byDietitianId(httpQuery))
         .order(dietitianCustomers.id));
   } else {
     result = query(

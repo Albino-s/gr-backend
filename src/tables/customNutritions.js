@@ -20,7 +20,14 @@ const objectFields = [
   'iron',
   'cholesterol',
   'createdAt',
-  'updatedAt'
+  'updatedAt',
+  'breakfastGoal',
+  'lunchGoal',
+  'dinnerGoal',
+  'snacksGoal',
+  'gender',
+  'height',
+  'weight'
 ];
 
 const columns = [
