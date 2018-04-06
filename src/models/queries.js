@@ -169,14 +169,17 @@ export const getUserRecipesHistory = R.curry((httpQuery, query) => {
     throw invalidInputError;
   }
   const rawQueryStr = `
-    SELECT *,
+    SELECT recipes.*, tags.name as tag_name, tags.type as tag_type,
     DATE_FORMAT(recipe_histories.createdAt, '%Y-%m-%d') as date,
     TIME(recipe_histories.createdAt) as time
     from recipe_histories JOIN recipes on recipes.id = recipe_histories.recipeId
+    LEFT JOIN recipe_tags ON recipes.id = recipe_tags.recipeId
+    LEFT JOIN tags on recipe_tags.tagId = tags.id
       WHERE userId = ${userId}
              and recipe_servings <> 0
              and recipe_histories.createdAt > '${intervalStart}'
-             and recipe_histories.createdAt < '${intervalEnd}'`;
+             and recipe_histories.createdAt < '${intervalEnd}'
+    GROUP BY recipe_histories.id`;
   return query(builQueryObj(rawQueryStr));
 });
 

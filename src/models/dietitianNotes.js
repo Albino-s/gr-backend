@@ -18,7 +18,7 @@ export const findAll = R.curry((httpQuery, query) => query(
         .where(byId(httpQuery))
         .where(byUserId(httpQuery))
         .where(byDietitianId(httpQuery))
-        .order(dietitianNotes.id)
+        .order(dietitianNotes.id.desc)
 ));
 
 export const findById = universal.findById(findAll);
