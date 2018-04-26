@@ -7,6 +7,10 @@
     "database": "grocer",
     "multipleStatements": true
   },
+  "s3config": {
+    "accessKeyId": "",
+    "secretAccessKey": ""
+  },
   "port": 3000,
   "secretPass": "plea5e_d1sable_f1eld5_val1dat10n",
   "auth":{
@@ -17,8 +21,10 @@
   },
   "api": {
       "url": "http://localhost",
-      "path": "v1"
+      "path": "v1",
+      "resetPassUrl": "auth/reset-password"
   },
+  "appName" : "3 Peas",
   "mailer": {
     "from": "grocer@clockwisesoftware.com",
     "options": {
