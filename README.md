@@ -7,8 +7,6 @@ You'll also need mysql-server installed.
 Clone the repository and execute the scripts from package.json:
 
 ```sh
-$ git clone git@bitbucket.org:clockwisesoftware/grocer-backend.git
-$ cd grocer-backend
 $ npm install
 ```
 
