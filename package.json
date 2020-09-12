@@ -38,7 +38,7 @@
     "moment": "^2.13.0",
     "mysql": "^2.10.2",
     "mz": "^2.4.0",
-    "node-fetch": "^1.5.1",
+    "node-fetch": "^2.6.1",
     "nodemailer": "^4.6.0",
     "ramda": "^0.20.1",
     "sanctuary": "^0.9.1",
